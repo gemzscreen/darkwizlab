@@ -1,0 +1,1003 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>DarkWiz Lab — interactive math, physics and chemistry for students</title>
+<meta name="description" content="DarkWiz Lab builds free, no-sign-up learning tools for high school and college. Move a value and the figure, the formula and the full solution rebuild in front of you. Math is live now; physics and chemistry are next.">
+<link rel="canonical" href="https://darkwizlab.com/">
+<meta name="theme-color" content="#0B0E1F">
+<meta name="color-scheme" content="dark light">
+
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="DarkWiz Lab">
+<meta property="og:url" content="https://darkwizlab.com/">
+<meta property="og:title" content="DarkWiz Lab — don't memorize math. Watch it work.">
+<meta property="og:description" content="Free interactive study tools for high school and college. 81 math topics with 3D figures, worked solutions and quizzes. Physics and chemistry in development.">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="DarkWiz Lab — don't memorize math. Watch it work.">
+<meta name="twitter:description" content="Free interactive study tools for high school and college. Math is live; physics and chemistry are next.">
+
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%237B5CFF'/%3E%3Cstop offset='1' stop-color='%2322D3EE'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='15' fill='url(%23g)'/%3E%3Cpath d='M32 15 L48 47 H16 Z' fill='none' stroke='%23fff' stroke-width='5' stroke-linejoin='round'/%3E%3C/svg%3E">
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+
+<style>
+/* ==========================================================
+   DarkWiz Lab — landing page
+   Tokens are inherited from the Math Learning App so the site
+   and the subdomain apps read as one product.
+   ========================================================== */
+:root, [data-theme="dark"]{
+  --bg:#0B0E1F; --bg-2:#070915;
+  --panel:#141A33; --panel-2:#1B2242;
+  --line:rgba(140,160,255,.14); --line-hi:rgba(140,160,255,.30);
+  --violet:#7B5CFF; --cyan:#22D3EE; --magenta:#FF5CA8; --lime:#7CFFB2; --amber:#FFC65C;
+  --ink:#EEF1FF; --muted:#8E97C4; --muted-2:#7C86B8;
+  --grad:linear-gradient(135deg,#7B5CFF 0%,#22D3EE 100%);
+  --grid:rgba(123,92,255,.06);
+  --glow-a:rgba(123,92,255,.30); --glow-b:rgba(34,211,238,.16);
+  --sunken:rgba(7,9,21,.5); --field:rgba(255,255,255,.05); --track:rgba(255,255,255,.09);
+  --on-accent:#0B0E1F; --shadow:none; --card-shadow:none;
+  --hair:rgba(140,160,255,.10);
+}
+[data-theme="light"]{
+  --bg:#F3F6FB; --bg-2:#E8EDF7; --panel:#FFFFFF; --panel-2:#FFFFFF;
+  --line:rgba(23,34,59,.12); --line-hi:rgba(83,48,220,.30);
+  --violet:#5330DC; --cyan:#0B7C93; --magenta:#C71B69; --lime:#0F8B52; --amber:#A96C08;
+  --ink:#17223B; --muted:#5A6780; --muted-2:#5F6884;
+  --grad:linear-gradient(135deg,#5330DC 0%,#0FA3C0 100%);
+  --grid:rgba(47,75,208,.06);
+  --glow-a:rgba(83,48,220,.12); --glow-b:rgba(15,163,192,.12);
+  --sunken:#F6F8FD; --field:#F6F8FD; --track:rgba(23,34,59,.10);
+  --on-accent:#FFFFFF; --shadow:0 2px 10px rgba(23,34,59,.07);
+  --card-shadow:0 6px 26px rgba(23,34,59,.07);
+  --hair:rgba(23,34,59,.08);
+}
+
+*{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html{scroll-behavior:smooth}
+body{
+  background:var(--bg); color:var(--ink);
+  font-family:'Inter',system-ui,-apple-system,sans-serif;
+  font-size:16px; line-height:1.6; overflow-x:hidden;
+  -webkit-font-smoothing:antialiased;
+}
+body::before{
+  content:''; position:fixed; inset:0; z-index:-2; pointer-events:none;
+  background:
+    linear-gradient(var(--grid) 1px,transparent 1px) 0 0/56px 56px,
+    linear-gradient(90deg,var(--grid) 1px,transparent 1px) 0 0/56px 56px;
+  mask-image:radial-gradient(ellipse at 50% 0%,#000 0%,transparent 78%);
+  -webkit-mask-image:radial-gradient(ellipse at 50% 0%,#000 0%,transparent 78%);
+}
+body::after{
+  content:''; position:fixed; inset:0; z-index:-1; pointer-events:none;
+  background:
+    radial-gradient(620px 420px at 12% -6%,var(--glow-a),transparent 70%),
+    radial-gradient(560px 380px at 92% 4%,var(--glow-b),transparent 70%);
+}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;background:none;border:none;cursor:pointer}
+:focus-visible{outline:2px solid var(--cyan); outline-offset:3px; border-radius:6px}
+
+.wrap{width:min(1180px,100% - 40px); margin-inline:auto}
+
+/* ---------- type ---------- */
+.eyebrow{
+  font-family:'JetBrains Mono',monospace; font-size:11px; font-weight:500;
+  letter-spacing:.22em; text-transform:uppercase; color:var(--muted-2);
+  display:flex; align-items:center; gap:10px;
+}
+.eyebrow::before{
+  content:''; width:22px; height:2px; border-radius:2px; background:var(--grad); flex:none;
+}
+h1,h2,h3{font-family:'Space Grotesk',sans-serif; line-height:1.08; letter-spacing:-.025em;
+  font-weight:700; overflow-wrap:break-word}
+h1{font-size:clamp(38px,6.4vw,68px)}
+h2{font-size:clamp(28px,3.9vw,44px); letter-spacing:-.03em}
+h3{font-size:19px; letter-spacing:-.01em}
+.grad-txt{background:var(--grad); -webkit-background-clip:text; background-clip:text; color:transparent}
+.lede{color:var(--muted); font-size:clamp(15.5px,1.5vw,18px); line-height:1.72; max-width:60ch}
+
+/* ---------- header ---------- */
+.site-head{
+  position:sticky; top:0; z-index:40;
+  backdrop-filter:blur(14px); -webkit-backdrop-filter:blur(14px);
+  background:color-mix(in srgb,var(--bg) 76%,transparent);
+  border-bottom:1px solid transparent; transition:border-color .25s;
+}
+.site-head.stuck{border-bottom-color:var(--line)}
+.head-row{display:flex; align-items:center; gap:18px; height:66px}
+.mark{display:flex; align-items:center; gap:11px; margin-right:auto}
+.mark-badge{
+  width:34px; height:34px; border-radius:10px; background:var(--grad);
+  display:grid; place-items:center; flex:none;
+}
+.mark-badge svg{width:19px; height:19px; display:block}
+.mark-name{font-family:'Space Grotesk',sans-serif; font-weight:700; font-size:17.5px;
+  letter-spacing:-.02em; white-space:nowrap}
+.mark-name span{color:var(--muted); font-weight:500}
+.nav{display:flex; align-items:center; gap:4px}
+.nav a{
+  padding:8px 13px; border-radius:9px; font-size:14px; color:var(--muted);
+  font-weight:500; transition:.18s;
+}
+.nav a:hover{color:var(--ink); background:var(--field)}
+.icon-btn{
+  width:36px; height:36px; border-radius:10px; border:1px solid var(--line);
+  display:grid; place-items:center; font-size:15px; transition:.18s; flex:none;
+}
+.icon-btn:hover{border-color:var(--line-hi); background:var(--field)}
+
+/* ---------- buttons ---------- */
+.btn{
+  display:inline-flex; align-items:center; gap:9px; padding:14px 22px; border-radius:13px;
+  font-weight:600; font-size:15px; transition:transform .16s, box-shadow .22s, border-color .18s, background .18s;
+  border:1px solid transparent; white-space:nowrap;
+}
+.btn-primary{background:var(--grad); color:#fff; box-shadow:0 10px 30px -12px var(--violet)}
+.btn-primary:hover{transform:translateY(-2px); box-shadow:0 16px 38px -12px var(--violet)}
+.btn-ghost{border-color:var(--line-hi); color:var(--ink); background:var(--field)}
+.btn-ghost:hover{transform:translateY(-2px); border-color:var(--cyan)}
+.btn-sm{padding:10px 16px; font-size:13.5px; border-radius:11px}
+.btn .arw{transition:transform .18s}
+.btn:hover .arw{transform:translateX(3px)}
+
+/* ---------- sections ---------- */
+.sect{padding:clamp(64px,8vw,110px) 0}
+.sect-head{margin-bottom:38px; display:flex; flex-direction:column; gap:16px}
+.sect-head .lede{margin-top:-2px}
+.rule{height:1px; background:var(--hair); border:0}
+
+/* ---------- hero ---------- */
+.hero{padding:clamp(38px,6vw,74px) 0 clamp(48px,6vw,86px)}
+.hero-grid{display:grid; grid-template-columns:minmax(0,1fr); gap:44px; align-items:center}
+.hero-copy{display:flex; flex-direction:column; gap:22px}
+.hero h1{margin-top:4px}
+.hero-cta{display:flex; flex-wrap:wrap; gap:12px; margin-top:4px}
+.hero-note{
+  font-family:'JetBrains Mono',monospace; font-size:12px; color:var(--muted-2); line-height:1.7;
+}
+.hero-note b{color:var(--lime); font-weight:500; margin-right:4px}
+
+/* ---------- the bench (signature element) ---------- */
+.bench{
+  border:1px solid var(--line); border-radius:22px; background:var(--panel);
+  box-shadow:var(--card-shadow); overflow:hidden;
+}
+.bench-top{
+  display:flex; align-items:center; gap:10px; padding:12px 16px;
+  border-bottom:1px solid var(--line);
+  font-family:'JetBrains Mono',monospace; font-size:10.5px; letter-spacing:.15em;
+  text-transform:uppercase; color:var(--muted-2);
+}
+.bench-dot{width:8px; height:8px; border-radius:50%; background:var(--grad); flex:none}
+.bench-top .live-dot{margin-left:auto; color:var(--lime); letter-spacing:.1em}
+.bench-stage{
+  background:radial-gradient(ellipse at 50% 20%,var(--glow-a),transparent 72%), var(--sunken);
+  padding:10px 12px 4px;
+}
+.bench-stage svg{display:block; width:100%; height:auto}
+
+.axis{stroke:var(--line-hi); stroke-width:1}
+.circ{fill:none; stroke:var(--line-hi); stroke-width:1.4}
+.arc{fill:none; stroke:var(--amber); stroke-width:2.4; stroke-linecap:round}
+.radius{stroke:var(--violet); stroke-width:2.6; stroke-linecap:round}
+.leg-cos{stroke:var(--cyan); stroke-width:3.2; stroke-linecap:round}
+.leg-sin{stroke:var(--magenta); stroke-width:3.2; stroke-linecap:round}
+.wave-ghost{fill:none; stroke:var(--line-hi); stroke-width:1.6}
+.wave-live{fill:none; stroke:var(--magenta); stroke-width:2.6; stroke-linecap:round}
+.link-line{stroke:var(--muted-2); stroke-width:1.2; stroke-dasharray:3 5; opacity:.7}
+.pt{fill:var(--ink); stroke:var(--violet); stroke-width:3}
+.pt-wave{fill:var(--magenta); stroke:var(--bg); stroke-width:2.5}
+.svg-lab{font-family:'JetBrains Mono',monospace; font-size:12px; font-weight:500; fill:var(--muted)}
+.svg-lab.cy{fill:var(--cyan)} .svg-lab.mg{fill:var(--magenta)} .svg-lab.am{fill:var(--amber)}
+
+.readouts{
+  display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); gap:1px;
+  background:var(--line); border-top:1px solid var(--line); border-bottom:1px solid var(--line);
+}
+.ro{background:var(--panel); padding:11px 8px 12px; text-align:center}
+.ro-k{
+  font-family:'JetBrains Mono',monospace; font-size:10.5px; letter-spacing:.10em;
+  color:var(--muted-2); display:block;
+}
+.ro-v{
+  font-family:'JetBrains Mono',monospace; font-size:clamp(14px,2.2vw,17px); font-weight:700;
+  display:block; margin-top:5px; font-variant-numeric:tabular-nums;
+}
+.ro:nth-child(1) .ro-v{color:var(--amber)}
+.ro:nth-child(2) .ro-v{color:var(--magenta)}
+.ro:nth-child(3) .ro-v{color:var(--cyan)}
+.ro:nth-child(4) .ro-v{color:var(--ink)}
+
+.bench-ctl{padding:14px 16px 16px; display:flex; flex-direction:column; gap:11px}
+.ctl-row{display:flex; align-items:center; gap:12px}
+.play{
+  width:38px; height:38px; border-radius:11px; border:1px solid var(--line-hi);
+  display:grid; place-items:center; font-size:13px; flex:none; background:var(--field); transition:.18s;
+}
+.play:hover{border-color:var(--cyan)}
+input[type=range]{
+  -webkit-appearance:none; appearance:none; width:100%; height:6px; border-radius:99px;
+  background:var(--track); cursor:pointer;
+}
+input[type=range]::-webkit-slider-thumb{
+  -webkit-appearance:none; appearance:none; width:20px; height:20px; border-radius:50%;
+  background:var(--grad); border:3px solid var(--panel); box-shadow:0 0 0 1px var(--line-hi);
+}
+input[type=range]::-moz-range-thumb{
+  width:20px; height:20px; border-radius:50%; background:var(--violet);
+  border:3px solid var(--panel); box-shadow:0 0 0 1px var(--line-hi);
+}
+.identity{
+  font-family:'JetBrains Mono',monospace; font-size:12px; color:var(--muted);
+  display:flex; align-items:center; justify-content:space-between; gap:10px; flex-wrap:wrap;
+  padding-top:2px;
+}
+.identity b{color:var(--lime); font-weight:700}
+
+/* ---------- stat strip ---------- */
+.stats{
+  display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:1px; background:var(--line);
+  border:1px solid var(--line); border-radius:18px; overflow:hidden;
+}
+.stat{background:var(--panel); padding:22px 18px}
+.stat-n{
+  font-family:'Space Grotesk',sans-serif; font-size:clamp(26px,3.4vw,36px); font-weight:700;
+  letter-spacing:-.03em; display:block;
+}
+.stat-l{
+  font-family:'JetBrains Mono',monospace; font-size:10.5px; letter-spacing:.14em;
+  text-transform:uppercase; color:var(--muted-2); margin-top:6px; display:block; line-height:1.5;
+}
+
+/* ---------- app cards ---------- */
+.apps{display:grid; grid-template-columns:minmax(0,1fr); gap:18px}
+.app{
+  position:relative; border:1px solid var(--line); border-radius:20px; background:var(--panel);
+  padding:26px 24px 24px; display:flex; flex-direction:column; gap:14px;
+  box-shadow:var(--card-shadow); transition:transform .2s, border-color .2s;
+}
+.app.is-live{border-color:var(--line-hi)}
+.app.is-live::before{
+  content:''; position:absolute; inset:-1px; border-radius:20px; padding:1px;
+  background:var(--grad); -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);
+  -webkit-mask-composite:xor; mask-composite:exclude; opacity:.55; pointer-events:none;
+}
+.app.is-live:hover{transform:translateY(-4px)}
+.app-top{display:flex; align-items:center; gap:12px}
+.app-ico{
+  width:44px; height:44px; border-radius:13px; background:var(--field); border:1px solid var(--line);
+  display:grid; place-items:center; font-size:21px; flex:none;
+}
+.app.is-live .app-ico{background:var(--grad); border-color:transparent}
+.chip{
+  margin-left:auto; font-family:'JetBrains Mono',monospace; font-size:9.5px; font-weight:700;
+  letter-spacing:.16em; text-transform:uppercase; padding:5px 10px; border-radius:99px;
+  border:1px solid currentColor;
+}
+.chip.live{color:var(--lime)} .chip.build{color:var(--amber)} .chip.queue{color:var(--muted-2)}
+.app h3{margin-top:2px}
+.app p{color:var(--muted); font-size:14.5px; line-height:1.68}
+.url{
+  font-family:'JetBrains Mono',monospace; font-size:11.5px; letter-spacing:-.01em;
+  color:var(--muted-2); background:var(--sunken); border:1px solid var(--line);
+  border-radius:10px; padding:9px 11px; display:block; white-space:nowrap;
+  overflow:hidden; text-overflow:ellipsis;
+}
+.url .host{color:var(--cyan)}
+.app.is-queued .url{opacity:.55}
+.app-foot{margin-top:auto; padding-top:6px}
+.soon-note{
+  font-family:'JetBrains Mono',monospace; font-size:11px; letter-spacing:.08em;
+  color:var(--muted-2); text-transform:uppercase;
+}
+
+/* ---------- subjects ---------- */
+.subjects{display:grid; grid-template-columns:minmax(0,1fr); gap:1px; background:var(--line);
+  border:1px solid var(--line); border-radius:18px; overflow:hidden}
+.subj{background:var(--panel); padding:20px 20px; display:flex; align-items:flex-start; gap:15px}
+.subj-ico{
+  width:40px; height:40px; border-radius:12px; background:var(--field); border:1px solid var(--line);
+  display:grid; place-items:center; font-size:19px; flex:none;
+}
+.subj-body{flex:1; min-width:0}
+.subj-name{font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:16px; display:block}
+.subj-desc{color:var(--muted); font-size:13.6px; line-height:1.6; margin-top:3px; display:block}
+.subj-num{
+  font-family:'JetBrains Mono',monospace; font-size:11px; font-weight:700; letter-spacing:.06em;
+  color:var(--cyan); background:var(--field); border:1px solid var(--line);
+  border-radius:99px; padding:5px 11px; flex:none; white-space:nowrap;
+}
+
+/* ---------- steps (a real sequence, so it is numbered) ---------- */
+.steps{display:grid; grid-template-columns:minmax(0,1fr); gap:18px; counter-reset:st}
+.step{
+  border-top:2px solid var(--line-hi); padding-top:18px; display:flex; flex-direction:column; gap:9px;
+}
+.step::before{
+  counter-increment:st; content:"0" counter(st);
+  font-family:'JetBrains Mono',monospace; font-size:12px; font-weight:700; letter-spacing:.14em;
+  color:var(--violet);
+}
+.step h3{font-size:17.5px}
+.step p{color:var(--muted); font-size:14.5px; line-height:1.68}
+
+/* ---------- closing cta ---------- */
+.cta-band{
+  border:1px solid var(--line-hi); border-radius:24px; background:var(--panel);
+  padding:clamp(32px,5vw,56px); text-align:center; box-shadow:var(--card-shadow);
+  background-image:radial-gradient(ellipse at 50% 0%,var(--glow-a),transparent 70%);
+}
+.cta-band h2{margin-bottom:14px}
+.cta-band .lede{margin:0 auto 26px}
+.cta-band .hero-cta{justify-content:center}
+
+/* ---------- footer ---------- */
+.site-foot{border-top:1px solid var(--line); padding:38px 0 46px}
+.foot-grid{display:flex; flex-wrap:wrap; gap:26px 40px; align-items:flex-start}
+.foot-blurb{color:var(--muted); font-size:13.5px; max-width:38ch; margin-top:12px; line-height:1.7}
+.foot-links{display:flex; flex-direction:column; gap:9px; font-size:13.5px}
+.foot-links b{
+  font-family:'JetBrains Mono',monospace; font-size:10px; letter-spacing:.16em;
+  text-transform:uppercase; color:var(--muted-2); font-weight:500; margin-bottom:3px;
+}
+.foot-links a{color:var(--muted); transition:.16s}
+.foot-links a:hover{color:var(--cyan)}
+.foot-bar{
+  margin-top:34px; padding-top:20px; border-top:1px solid var(--hair);
+  display:flex; flex-wrap:wrap; gap:10px 18px; justify-content:space-between;
+  font-family:'JetBrains Mono',monospace; font-size:11px; color:var(--muted-2);
+}
+
+/* ---------- reveal ---------- */
+.rv{opacity:0; transform:translateY(18px); transition:opacity .6s ease, transform .6s ease}
+.rv.in{opacity:1; transform:none}
+
+/* ---------- responsive ---------- */
+@media (min-width:600px){
+  .apps{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .stats{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .steps{grid-template-columns:repeat(2,minmax(0,1fr)); gap:24px}
+}
+@media (min-width:940px){
+  .hero-grid{grid-template-columns:minmax(0,1.02fr) minmax(0,.98fr); gap:52px}
+  .apps{grid-template-columns:repeat(4,minmax(0,1fr))}
+  .subjects{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .steps{grid-template-columns:repeat(4,minmax(0,1fr))}
+  .stats{grid-template-columns:repeat(6,minmax(0,1fr))}
+  .foot-grid{flex-wrap:nowrap; gap:60px}
+  .foot-brand{flex:1}
+}
+/* the header call to action loses a word before it loses the button */
+.cta-short{display:none}
+@media (max-width:860px){
+  .cta-full{display:none}
+  .cta-short{display:inline}
+}
+@media (max-width:760px){
+  .nav{display:none}
+}
+@media (max-width:480px){
+  .wrap{width:calc(100% - 32px)}
+  .eyebrow{font-size:10px; letter-spacing:.16em}
+  .hero-cta .btn{width:100%; justify-content:center}
+  .head-row{gap:10px}
+  .mark-name{font-size:15.5px}
+  .mark-badge{width:31px; height:31px; border-radius:9px}
+  .head-cta{padding:9px 13px; font-size:13px}
+  .icon-btn{width:33px; height:33px}
+  .readouts{grid-template-columns:repeat(2,minmax(0,1fr))}
+}
+/* smallest phones: the header keeps the wordmark and the theme control only —
+   the hero's own call to action is a few hundred pixels away. */
+@media (max-width:392px){
+  .head-cta{display:none}
+}
+@media (prefers-reduced-motion:reduce){
+  *{animation:none!important; transition-duration:.01ms!important}
+  html{scroll-behavior:auto}
+  .rv{opacity:1; transform:none}
+}
+</style>
+</head>
+<body>
+
+<header class="site-head" id="head">
+  <div class="wrap head-row">
+    <a class="mark" href="#top" aria-label="DarkWiz Lab home">
+      <span class="mark-badge" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M12 4 L20.5 19 H3.5 Z" stroke="#fff" stroke-width="2.4" stroke-linejoin="round"/></svg>
+      </span>
+      <span class="mark-name">DarkWiz <span>Lab</span></span>
+    </a>
+    <nav class="nav" aria-label="Sections">
+      <a href="#apps">Apps</a>
+      <a href="#inside">Inside the math app</a>
+      <a href="#how">How it works</a>
+    </nav>
+    <button class="icon-btn" id="themeBtn" aria-label="Change appearance">🌗</button>
+    <a class="btn btn-primary btn-sm head-cta" href="https://mathlearningapp.darkwizlab.com"><span class="cta-full">Open the math app</span><span class="cta-short">Open math app</span></a>
+  </div>
+</header>
+
+<main id="top">
+
+<!-- ============ HERO ============ -->
+<section class="hero">
+  <div class="wrap hero-grid">
+    <div class="hero-copy">
+      <p class="eyebrow">DarkWiz Lab · study tools that react</p>
+      <h1>Don't memorize math.<br><span class="grad-txt">Watch it work.</span></h1>
+      <p class="lede">
+        Every lesson here is a working instrument, not a page of notes. Move a value and the figure,
+        the formula and the full solution rebuild in front of you — so you see <em>why</em> the answer
+        changes, not just that it did.
+      </p>
+      <div class="hero-cta">
+        <a class="btn btn-primary" href="https://mathlearningapp.darkwizlab.com">
+          Open the Math Learning App <span class="arw" aria-hidden="true">→</span>
+        </a>
+        <a class="btn btn-ghost" href="#apps">See what's coming</a>
+      </div>
+      <p class="hero-note">
+        <b>●</b> Free · No sign-up · No ads · Built for high school and college
+      </p>
+    </div>
+
+    <!-- signature element: a live piece of the product -->
+    <div class="bench" id="bench">
+      <div class="bench-top">
+        <span class="bench-dot" aria-hidden="true"></span>
+        <span>Bench 01 — the unit circle</span>
+        <span class="live-dot">● live</span>
+      </div>
+
+      <div class="bench-stage">
+        <svg id="benchSvg" viewBox="0 0 620 300" role="img"
+             aria-label="A point moving around the unit circle, with its height traced as a sine wave.">
+          <g id="gCircle">
+            <!-- axes -->
+            <line class="axis" x1="0"   y1="140" x2="220" y2="140"/>
+            <line class="axis" x1="110" y1="30"  x2="110" y2="250"/>
+            <circle class="circ" cx="110" cy="140" r="100"/>
+            <path id="arc" class="arc" d=""/>
+            <line id="legCos" class="leg-cos" x1="110" y1="140" x2="110" y2="140"/>
+            <line id="legSin" class="leg-sin" x1="110" y1="140" x2="110" y2="140"/>
+            <line id="rad" class="radius" x1="110" y1="140" x2="210" y2="140"/>
+            <circle id="ptC" class="pt" cx="210" cy="140" r="5.5"/>
+            <text id="labTheta" class="svg-lab am" x="132" y="132">θ</text>
+            <text class="svg-lab cy" x="8" y="272">cos θ</text>
+            <text class="svg-lab mg" x="150" y="272">sin θ</text>
+          </g>
+
+          <line id="linkLine" class="link-line" x1="0" y1="0" x2="0" y2="0"/>
+
+          <g id="gWave">
+            <line class="axis" x1="0" y1="140" x2="366" y2="140"/>
+            <path id="waveGhost" class="wave-ghost" d=""/>
+            <path id="waveLive"  class="wave-live"  d=""/>
+            <circle id="ptW" class="pt-wave" cx="0" cy="140" r="5"/>
+            <text class="svg-lab" x="4"   y="164" text-anchor="start">0°</text>
+            <text class="svg-lab" x="90"  y="164" text-anchor="middle">90°</text>
+            <text class="svg-lab" x="180" y="164" text-anchor="middle">180°</text>
+            <text class="svg-lab" x="270" y="164" text-anchor="middle">270°</text>
+            <text class="svg-lab" x="360" y="164" text-anchor="end">360°</text>
+            <text class="svg-lab mg" x="0" y="34">y = sin θ</text>
+          </g>
+        </svg>
+      </div>
+
+      <div class="readouts">
+        <div class="ro"><span class="ro-k">θ</span><span class="ro-v" id="vTheta">35°</span></div>
+        <div class="ro"><span class="ro-k">sin θ</span><span class="ro-v" id="vSin">0.574</span></div>
+        <div class="ro"><span class="ro-k">cos θ</span><span class="ro-v" id="vCos">0.819</span></div>
+        <div class="ro"><span class="ro-k">tan θ</span><span class="ro-v" id="vTan">0.700</span></div>
+      </div>
+
+      <div class="bench-ctl">
+        <div class="ctl-row">
+          <button class="play" id="playBtn" aria-label="Pause the animation">❚❚</button>
+          <input id="thetaRange" type="range" min="0" max="360" step="1" value="35"
+                 aria-label="Angle theta in degrees">
+        </div>
+        <p class="identity">
+          <span>sin²θ + cos²θ = <b id="vIdent">1.000</b></span>
+          <span id="vQuad">Quadrant I</span>
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="wrap"><hr class="rule"></div>
+
+<!-- ============ APPS ============ -->
+<section class="sect" id="apps">
+  <div class="wrap">
+    <div class="sect-head rv">
+      <p class="eyebrow">On the bench</p>
+      <h2>One subject at a time,<br>each on its own address.</h2>
+      <p class="lede">
+        Every DarkWiz Lab app is a single self-contained page that runs on its own subdomain.
+        Math is finished and open. The others are being built with the same engine.
+      </p>
+    </div>
+
+    <div class="apps">
+      <article class="app is-live rv">
+        <div class="app-top">
+          <span class="app-ico" aria-hidden="true">∑</span>
+          <span class="chip live">Live</span>
+        </div>
+        <h3>Math Learning App</h3>
+        <div class="url"><span class="host">mathlearningapp</span>.darkwizlab.com</div>
+        <p>
+          81 topics from place value to integral calculus. Rotatable 3D figures, worked solutions that
+          show every substitution, and scored quizzes drawn from a pool of thousands of questions.
+        </p>
+        <div class="app-foot">
+          <a class="btn btn-primary btn-sm" href="https://mathlearningapp.darkwizlab.com">
+            Open <span class="arw" aria-hidden="true">→</span>
+          </a>
+        </div>
+      </article>
+
+      <article class="app rv">
+        <div class="app-top">
+          <span class="app-ico" aria-hidden="true">⚛︎</span>
+          <span class="chip build">In development</span>
+        </div>
+        <h3>Physics</h3>
+        <div class="url"><span class="host">physics</span>.darkwizlab.com</div>
+        <p>
+          Kinematics, forces, energy, waves and circuits — with vectors you can drag, free-body diagrams
+          that resolve themselves, and graphs that redraw as the motion changes.
+        </p>
+        <div class="app-foot"><span class="soon-note">Next in the queue</span></div>
+      </article>
+
+      <article class="app rv">
+        <div class="app-top">
+          <span class="app-ico" aria-hidden="true">⚗︎</span>
+          <span class="chip build">In development</span>
+        </div>
+        <h3>Chemistry</h3>
+        <div class="url"><span class="host">chemistry</span>.darkwizlab.com</div>
+        <p>
+          Stoichiometry, gas laws, solutions and equilibrium. Balance an equation and watch the mole
+          ratios, the limiting reagent and the yield follow it through.
+        </p>
+        <div class="app-foot"><span class="soon-note">In design</span></div>
+      </article>
+
+      <article class="app is-queued rv">
+        <div class="app-top">
+          <span class="app-ico" aria-hidden="true">σ</span>
+          <span class="chip queue">Planned</span>
+        </div>
+        <h3>Probability &amp; Statistics</h3>
+        <div class="url"><span class="host">stats</span>.darkwizlab.com</div>
+        <p>
+          Distributions you can reshape, samples you can re-roll, and confidence intervals that widen
+          and narrow as you change n. Ideas that only make sense once you can move them.
+        </p>
+        <div class="app-foot"><span class="soon-note">Scoped, not started</span></div>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ INSIDE ============ -->
+<section class="sect" id="inside">
+  <div class="wrap">
+    <div class="sect-head rv">
+      <p class="eyebrow">Inside the math app</p>
+      <h2>Six subjects. Sixteen branches.<br>Eighty-one topics.</h2>
+      <p class="lede">
+        Ordered so each topic leans on the one before it — the same path a course takes, from
+        arithmetic through to integral calculus.
+      </p>
+    </div>
+
+    <div class="stats rv" style="margin-bottom:34px">
+      <div class="stat"><span class="stat-n grad-txt">6</span><span class="stat-l">Subjects</span></div>
+      <div class="stat"><span class="stat-n grad-txt">16</span><span class="stat-l">Branches</span></div>
+      <div class="stat"><span class="stat-n grad-txt">81</span><span class="stat-l">Topics</span></div>
+      <div class="stat"><span class="stat-n grad-txt">385</span><span class="stat-l">Worked formula blocks</span></div>
+      <div class="stat"><span class="stat-n grad-txt">3D</span><span class="stat-l">Figures you can rotate</span></div>
+      <div class="stat"><span class="stat-n grad-txt">0</span><span class="stat-l">Accounts required</span></div>
+    </div>
+
+    <div class="subjects rv">
+      <div class="subj">
+        <span class="subj-ico" aria-hidden="true">🔢</span>
+        <span class="subj-body">
+          <span class="subj-name">Arithmetic</span>
+          <span class="subj-desc">Place value, fractions and decimals, ratio, percent, interest and scientific notation — the machinery every later branch runs on.</span>
+        </span>
+        <span class="subj-num">3 branches</span>
+      </div>
+      <div class="subj">
+        <span class="subj-ico" aria-hidden="true">🧮</span>
+        <span class="subj-body">
+          <span class="subj-name">Number Theory</span>
+          <span class="subj-desc">Divisibility, prime factorization and GCD, then modular arithmetic — the clock arithmetic behind modern encryption.</span>
+        </span>
+        <span class="subj-num">2 branches</span>
+      </div>
+      <div class="subj">
+        <span class="subj-ico" aria-hidden="true">𝑥</span>
+        <span class="subj-body">
+          <span class="subj-name">Algebra</span>
+          <span class="subj-desc">Exponents, factoring, solving and inequalities, then quadratics, systems, logarithms and sequences.</span>
+        </span>
+        <span class="subj-num">2 branches</span>
+      </div>
+      <div class="subj">
+        <span class="subj-ico" aria-hidden="true">∫</span>
+        <span class="subj-body">
+          <span class="subj-name">Calculus</span>
+          <span class="subj-desc">Limits and continuity, derivatives and optimization, then antiderivatives, area and volumes of revolution.</span>
+        </span>
+        <span class="subj-num">3 branches</span>
+      </div>
+      <div class="subj">
+        <span class="subj-ico" aria-hidden="true">📡</span>
+        <span class="subj-body">
+          <span class="subj-name">Trigonometry</span>
+          <span class="subj-desc">The six ratios in a right triangle, the unit circle and wave graphs, then identities and the sine and cosine laws.</span>
+        </span>
+        <span class="subj-num">3 branches</span>
+      </div>
+      <div class="subj">
+        <span class="subj-ico" aria-hidden="true">📐</span>
+        <span class="subj-body">
+          <span class="subj-name">Geometry</span>
+          <span class="subj-desc">Plane figures, solids you can rotate for volume and surface area, and analytic geometry on the coordinate grid.</span>
+        </span>
+        <span class="subj-num">3 branches</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ HOW ============ -->
+<section class="sect" id="how">
+  <div class="wrap">
+    <div class="sect-head rv">
+      <p class="eyebrow">How a lesson runs</p>
+      <h2>Four steps, every topic.</h2>
+      <p class="lede">
+        The loop is the same whether you are dividing fractions or finding a volume of revolution,
+        so there is nothing to relearn when the mathematics gets harder.
+      </p>
+    </div>
+
+    <div class="steps">
+      <article class="step rv">
+        <h3>Pick a topic</h3>
+        <p>Choose a subject, then a branch, then a topic. Each one opens with a plain definition and a
+           note on where the idea is actually used.</p>
+      </article>
+      <article class="step rv">
+        <h3>Move a value</h3>
+        <p>Every measurement is a control. Change a radius, an angle, a coefficient — the figure redraws
+           the instant you let go of the slider.</p>
+      </article>
+      <article class="step rv">
+        <h3>Read the solution</h3>
+        <p>Each formula appears three ways: the general rule, your numbers substituted into it, and the
+           result — with the reasoning underneath, in sentences.</p>
+      </article>
+      <article class="step rv">
+        <h3>Get asked</h3>
+        <p>Quiz yourself on one topic or a whole branch. Answers feed mastery bars and streaks, so you
+           can see which topics still need another pass.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ============ CTA ============ -->
+<section class="sect" style="padding-top:0">
+  <div class="wrap">
+    <div class="cta-band rv">
+      <p class="eyebrow" style="justify-content:center">Open now</p>
+      <h2>Start with the math.</h2>
+      <p class="lede">
+        Nothing to install, nothing to sign up for. Open it on a phone between classes or on a laptop
+        while you work through a problem set.
+      </p>
+      <div class="hero-cta">
+        <a class="btn btn-primary" href="https://mathlearningapp.darkwizlab.com">
+          mathlearningapp.darkwizlab.com <span class="arw" aria-hidden="true">→</span>
+        </a>
+        <a class="btn btn-ghost" href="mailto:hello@darkwizlab.com?subject=DarkWiz%20Lab%20—%20suggestion">
+          Suggest a topic
+        </a>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="site-foot">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <a class="mark" href="#top">
+          <span class="mark-badge" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none"><path d="M12 4 L20.5 19 H3.5 Z" stroke="#fff" stroke-width="2.4" stroke-linejoin="round"/></svg>
+          </span>
+          <span class="mark-name">DarkWiz <span>Lab</span></span>
+        </a>
+        <p class="foot-blurb">
+          Small, fast, self-contained study tools for high school and college students.
+          Free to use and free of accounts, ads and trackers.
+        </p>
+      </div>
+
+      <nav class="foot-links" aria-label="Apps">
+        <b>Apps</b>
+        <a href="https://mathlearningapp.darkwizlab.com">Math Learning App</a>
+        <a href="#apps">Physics — in development</a>
+        <a href="#apps">Chemistry — in development</a>
+        <a href="#apps">Probability &amp; Statistics — planned</a>
+      </nav>
+
+      <nav class="foot-links" aria-label="This site">
+        <b>Site</b>
+        <a href="#inside">What's inside</a>
+        <a href="#how">How a lesson runs</a>
+        <a href="mailto:hello@darkwizlab.com?subject=DarkWiz%20Lab%20—%20bug%20report">Report a problem</a>
+        <a href="mailto:hello@darkwizlab.com">hello@darkwizlab.com</a>
+      </nav>
+    </div>
+
+    <div class="foot-bar">
+      <span>© <span id="yr">2026</span> DarkWiz Lab</span>
+      <span>Don't memorize math. Watch it work.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  'use strict';
+  var $ = function(s){ return document.querySelector(s); };
+
+  /* ---------- year ---------- */
+  $('#yr').textContent = new Date().getFullYear();
+
+  /* ---------- theme: auto → light → dark ---------- */
+  var Theme = {
+    mode: 'auto',
+    resolve: function(){
+      if(this.mode !== 'auto') return this.mode;
+      return matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+    },
+    apply: function(){
+      var r = this.resolve();
+      document.documentElement.setAttribute('data-theme', r);
+      $('#themeBtn').textContent = this.mode === 'auto' ? '🌗' : (this.mode === 'light' ? '☀️' : '🌙');
+      var m = document.querySelector('meta[name=theme-color]');
+      if(m) m.setAttribute('content', r === 'light' ? '#F3F6FB' : '#0B0E1F');
+    },
+    set: function(m){
+      this.mode = m;
+      try{ localStorage.setItem('dwl-theme', m); }catch(e){}
+      this.apply();
+    }
+  };
+  try{ var saved = localStorage.getItem('dwl-theme'); if(saved) Theme.mode = saved; }catch(e){}
+  $('#themeBtn').addEventListener('click', function(){
+    var order = ['auto','light','dark'];
+    Theme.set(order[(order.indexOf(Theme.mode) + 1) % 3]);
+  });
+  try{
+    matchMedia('(prefers-color-scheme: light)').addEventListener('change', function(){
+      if(Theme.mode === 'auto') Theme.apply();
+    });
+  }catch(e){}
+  Theme.apply();
+
+  /* ---------- sticky header hairline ---------- */
+  var head = $('#head');
+  var onScroll = function(){ head.classList.toggle('stuck', window.scrollY > 8); };
+  window.addEventListener('scroll', onScroll, {passive:true});
+  onScroll();
+
+  /* ---------- scroll reveal ---------- */
+  var rv = document.querySelectorAll('.rv');
+  if('IntersectionObserver' in window){
+    var io = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); }
+      });
+    }, {rootMargin:'0px 0px -8% 0px', threshold:0.08});
+    rv.forEach(function(el, i){ el.style.transitionDelay = (Math.min(i,4) * 60) + 'ms'; io.observe(el); });
+  }else{
+    rv.forEach(function(el){ el.classList.add('in'); });
+  }
+
+  /* ==========================================================
+     BENCH 01 — the unit circle
+     Circle panel: local 220 x 280, centre (110,140), r = 100
+     Wave panel:   local 366 x 280, baseline y = 140, amp = 100
+     ========================================================== */
+  var RAD = Math.PI / 180;
+  var CX = 110, CY = 140, R = 100, AMP = 100, BASE = 140;
+
+  var svg      = $('#benchSvg'),
+      gCircle  = $('#gCircle'),
+      gWave    = $('#gWave'),
+      linkLine = $('#linkLine'),
+      arc      = $('#arc'),
+      legCos   = $('#legCos'),
+      legSin   = $('#legSin'),
+      radLine  = $('#rad'),
+      ptC      = $('#ptC'),
+      ptW      = $('#ptW'),
+      waveGhost= $('#waveGhost'),
+      waveLive = $('#waveLive'),
+      range    = $('#thetaRange'),
+      playBtn  = $('#playBtn');
+
+  var theta = 35, playing = true, raf = null, last = 0, wide = true;
+
+  var reduce = false;
+  try{ reduce = matchMedia('(prefers-reduced-motion: reduce)').matches; }catch(e){}
+  if(reduce) playing = false;
+
+  function fmt(v){
+    if(!isFinite(v)) return '∞';
+    var s = (Math.round(v * 1000) / 1000).toFixed(3);
+    return (s === '-0.000') ? '0.000' : s;
+  }
+
+  /* full sine curve, drawn once per layout, from a→b degrees */
+  function wavePath(a, b){
+    var d = '', t;
+    for(t = a; t <= b + 0.001; t += 2){
+      d += (t === a ? 'M' : 'L') + (t).toFixed(2) + ' ' + (BASE - AMP * Math.sin(t * RAD)).toFixed(2) + ' ';
+    }
+    if(b > a && (b - a) % 2 !== 0){
+      d += 'L' + b.toFixed(2) + ' ' + (BASE - AMP * Math.sin(b * RAD)).toFixed(2);
+    }
+    return d.trim();
+  }
+
+  /* place the two panels for the available width */
+  function layout(){
+    var w = svg.parentNode.clientWidth || 560;
+    var nextWide = w >= 520;
+    wide = nextWide;
+    if(wide){
+      svg.setAttribute('viewBox', '0 0 620 300');
+      gCircle.setAttribute('transform', 'translate(14,12)');
+      gWave.setAttribute('transform', 'translate(244,12)');
+      linkLine.style.display = '';
+    }else{
+      svg.setAttribute('viewBox', '0 0 400 566');
+      gCircle.setAttribute('transform', 'translate(90,4)');
+      gWave.setAttribute('transform', 'translate(16,296)');
+      linkLine.style.display = 'none';
+    }
+    draw();
+  }
+
+  function draw(){
+    var t   = theta,
+        r   = t * RAD,
+        sin = Math.sin(r),
+        cos = Math.cos(r),
+        px  = CX + R * cos,
+        py  = CY - R * sin;
+
+    radLine.setAttribute('x2', px.toFixed(2));
+    radLine.setAttribute('y2', py.toFixed(2));
+    ptC.setAttribute('cx', px.toFixed(2));
+    ptC.setAttribute('cy', py.toFixed(2));
+
+    legCos.setAttribute('x2', px.toFixed(2));
+    legCos.setAttribute('y2', CY);
+    legSin.setAttribute('x1', px.toFixed(2));
+    legSin.setAttribute('y1', CY);
+    legSin.setAttribute('x2', px.toFixed(2));
+    legSin.setAttribute('y2', py.toFixed(2));
+
+    /* angle arc, swept from 0° */
+    var ar = 34;
+    if(t < 0.4){
+      arc.setAttribute('d', '');
+    }else{
+      var large = t > 180 ? 1 : 0;
+      arc.setAttribute('d',
+        'M' + (CX + ar) + ' ' + CY +
+        ' A' + ar + ' ' + ar + ' 0 ' + large + ' 0 ' +
+        (CX + ar * Math.cos(r)).toFixed(2) + ' ' + (CY - ar * Math.sin(r)).toFixed(2));
+    }
+    var half = (t / 2) * RAD;
+    $('#labTheta').setAttribute('x', (CX + (ar + 14) * Math.cos(half) - 5).toFixed(2));
+    $('#labTheta').setAttribute('y', (CY - (ar + 14) * Math.sin(half) + 5).toFixed(2));
+
+    /* wave */
+    waveLive.setAttribute('d', wavePath(0, t));
+    ptW.setAttribute('cx', t.toFixed(2));
+    ptW.setAttribute('cy', (BASE - AMP * sin).toFixed(2));
+
+    if(wide){
+      linkLine.setAttribute('x1', (14 + px).toFixed(2));
+      linkLine.setAttribute('y1', (12 + py).toFixed(2));
+      linkLine.setAttribute('x2', (244 + t).toFixed(2));
+      linkLine.setAttribute('y2', (12 + BASE - AMP * sin).toFixed(2));
+    }
+
+    /* readouts */
+    $('#vTheta').textContent = Math.round(t) + '°';
+    $('#vSin').textContent   = fmt(sin);
+    $('#vCos').textContent   = fmt(cos);
+    var nearAsymptote = Math.abs(cos) < 1e-3;
+    $('#vTan').textContent   = nearAsymptote ? 'undef.' : fmt(sin / cos);
+    $('#vIdent').textContent = fmt(sin * sin + cos * cos);
+
+    var q = t >= 360 ? 1 : Math.floor(t / 90) + 1;
+    var onAxis = (Math.round(t) % 90 === 0);
+    $('#vQuad').textContent = onAxis ? 'On an axis' : ('Quadrant ' + ['I','II','III','IV'][q - 1]);
+
+    if(range.value !== String(Math.round(t))) range.value = Math.round(t);
+  }
+
+  function frame(ts){
+    if(!playing) return;
+    if(!last) last = ts;
+    var dt = Math.min(ts - last, 50);
+    last = ts;
+    theta = (theta + dt * 0.022) % 360;
+    draw();
+    raf = requestAnimationFrame(frame);
+  }
+
+  function setPlaying(on){
+    playing = on;
+    playBtn.textContent = on ? '❚❚' : '▶';
+    playBtn.setAttribute('aria-label', on ? 'Pause the animation' : 'Play the animation');
+    if(on){ last = 0; raf = requestAnimationFrame(frame); }
+    else if(raf){ cancelAnimationFrame(raf); raf = null; }
+  }
+
+  playBtn.addEventListener('click', function(){ setPlaying(!playing); });
+  range.addEventListener('input', function(){
+    if(playing) setPlaying(false);
+    theta = Number(range.value);
+    draw();
+  });
+
+  /* pause while off-screen so the tab stays cheap */
+  if('IntersectionObserver' in window){
+    var vis = new IntersectionObserver(function(entries){
+      entries.forEach(function(e){
+        if(!e.isIntersecting && playing){ setPlaying(false); }
+      });
+    }, {threshold:0.05});
+    vis.observe($('#bench'));
+  }
+  document.addEventListener('visibilitychange', function(){
+    if(document.hidden && playing) setPlaying(false);
+  });
+
+  window.addEventListener('resize', layout);
+
+  waveGhost.setAttribute('d', wavePath(0, 360));
+  layout();
+  setPlaying(playing);
+})();
+</script>
+</body>
+</html>
