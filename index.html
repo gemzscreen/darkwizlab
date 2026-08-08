@@ -409,25 +409,34 @@ input[type=range]::-moz-range-thumb{
   .rv{opacity:1; transform:none}
 }
 </style>
-<!-- ═══ Analytics ═══════════════════════════════════════════════════════
-     Umami Cloud (free tier: 100k events/month, 3 sites, no cookie banner).
-     1. Sign up at cloud.umami.is, add this site, copy the Website ID.
-     2. Paste it into data-website-id below. That is the only edit needed.
+<!-- ═══ Analytics ══════════════════════════════════════════════════
+     Umami Cloud. The free plan allows ONE website, so both darkwizlab.com and
+     mathlearningapp.darkwizlab.com report into the same one and are told apart
+     by data-tag ("hub" here, "app" in the math app).
 
-     Switching to GA4 later? Replace ONLY this <script> tag with the GA4
-     snippet. DW.track() below detects whichever library is loaded, so none
-     of the tracking calls elsewhere in this file have to change.
-     ═════════════════════════════════════════════════════════════════════ -->
+     1. Sign up at cloud.umami.is and add ONE website: darkwizlab.com
+     2. Copy its Website ID and paste it below.
+     3. Paste the SAME id into the other file. Do not change the data-tag.
+
+     In the dashboard, use Filter -> Tag to see either site on its own, or leave
+     the filter off to see the whole funnel as one journey.
+
+     Switching to GA4 later? Replace ONLY this <script> tag. DW.track() below
+     detects whichever library is loaded, so no other line has to change.
+     ════════════════════════════════════════════════════════════════ -->
 <script defer src="https://cloud.umami.is/script.js"
         data-website-id="PASTE-YOUR-UMAMI-WEBSITE-ID"
+        data-tag="hub"
         data-domains="darkwizlab.com,mathlearningapp.darkwizlab.com"></script>
 <script>
 /* Tiny provider-agnostic wrapper. Never throws, never blocks the UI. */
 window.DW = window.DW || {};
+DW.site = "hub";
 DW.track = function(name, data){
   try{
-    if (window.umami && typeof window.umami.track === 'function') window.umami.track(name, data);
-    else if (typeof window.gtag === 'function') window.gtag('event', name, data || {});
+    var d = Object.assign({site: DW.site}, data || {});
+    if (window.umami && typeof window.umami.track === 'function') window.umami.track(name, d);
+    else if (typeof window.gtag === 'function') window.gtag('event', name, d);
   }catch(e){ /* analytics must never break the app */ }
 };
 /* Fires at most once per page load — for things a visitor can repeat endlessly. */
