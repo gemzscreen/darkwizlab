@@ -14,7 +14,12 @@
 <meta property="og:url" content="https://darkwizlab.com/">
 <meta property="og:title" content="DarkWiz Lab — don't memorize math. Watch it work.">
 <meta property="og:description" content="Free interactive study tools for high school and college. 81 math topics with 3D figures, worked solutions and quizzes. Physics and chemistry in development.">
+<meta property="og:image" content="https://darkwizlab.com/og-image.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Don't memorize math. Watch it work. — DarkWiz Lab">
 <meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:image" content="https://darkwizlab.com/og-image.png">
 <meta name="twitter:title" content="DarkWiz Lab — don't memorize math. Watch it work.">
 <meta name="twitter:description" content="Free interactive study tools for high school and college. Math is live; physics and chemistry are next.">
 
@@ -404,6 +409,35 @@ input[type=range]::-moz-range-thumb{
   .rv{opacity:1; transform:none}
 }
 </style>
+<!-- ═══ Analytics ═══════════════════════════════════════════════════════
+     Umami Cloud (free tier: 100k events/month, 3 sites, no cookie banner).
+     1. Sign up at cloud.umami.is, add this site, copy the Website ID.
+     2. Paste it into data-website-id below. That is the only edit needed.
+
+     Switching to GA4 later? Replace ONLY this <script> tag with the GA4
+     snippet. DW.track() below detects whichever library is loaded, so none
+     of the tracking calls elsewhere in this file have to change.
+     ═════════════════════════════════════════════════════════════════════ -->
+<script defer src="https://cloud.umami.is/script.js"
+        data-website-id="PASTE-YOUR-UMAMI-WEBSITE-ID"
+        data-domains="darkwizlab.com,mathlearningapp.darkwizlab.com"></script>
+<script>
+/* Tiny provider-agnostic wrapper. Never throws, never blocks the UI. */
+window.DW = window.DW || {};
+DW.track = function(name, data){
+  try{
+    if (window.umami && typeof window.umami.track === 'function') window.umami.track(name, data);
+    else if (typeof window.gtag === 'function') window.gtag('event', name, data || {});
+  }catch(e){ /* analytics must never break the app */ }
+};
+/* Fires at most once per page load — for things a visitor can repeat endlessly. */
+DW.trackOnce = function(name, data){
+  DW._seen = DW._seen || {};
+  if (DW._seen[name]) return;
+  DW._seen[name] = 1;
+  DW.track(name, data);
+};
+</script>
 </head>
 <body>
 
@@ -997,6 +1031,39 @@ input[type=range]::-moz-range-thumb{
   waveGhost.setAttribute('d', wavePath(0, 360));
   layout();
   setPlaying(playing);
+})();
+</script>
+<script>
+/* ═══ Landing page conversion tracking ═════════════════════════════════
+   Answers the only question this page exists to answer: how many people
+   arrive here and go on to open the math app, and which button sent them. */
+(function(){
+  'use strict';
+  function place(a){
+    if (a.closest('.site-head')) return 'header';
+    if (a.closest('.hero'))      return 'hero';
+    if (a.closest('.app'))       return 'app-card';
+    if (a.closest('.cta-band'))  return 'closing-band';
+    if (a.closest('.site-foot')) return 'footer';
+    return 'other';
+  }
+  document.addEventListener('click', function(e){
+    var a = e.target && e.target.closest ? e.target.closest('a') : null;
+    if (!a) return;
+    var href = a.getAttribute('href') || '';
+    if (href.indexOf('mathlearningapp') > -1) DW.track('open-math-app', {place: place(a)});
+    else if (href.indexOf('mailto:') === 0)   DW.track('email-click',   {place: place(a)});
+  }, true);
+
+  /* Did the hero demo actually get touched? This is the page's core promise. */
+  var rng = document.getElementById('thetaRange');
+  if (rng) rng.addEventListener('input', function(){
+    DW.trackOnce('demo-interact', {demo: 'unit-circle'});
+  });
+  var play = document.getElementById('playBtn');
+  if (play) play.addEventListener('click', function(){
+    DW.trackOnce('demo-interact', {demo: 'unit-circle'});
+  });
 })();
 </script>
 </body>
