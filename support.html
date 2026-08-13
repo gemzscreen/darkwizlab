@@ -292,7 +292,7 @@ DW.trackOnce = function(name, data){
       </p>
       <div class="btn-row">
         <button class="btn btn-ghost" id="shareBtn">Share DarkWiz Lab</button>
-        <a class="btn btn-ghost" href="https://mathlearningapp.darkwizlab.com">Back to studying →</a>
+        <a class="btn btn-ghost" href="/">Back to DarkWiz Lab →</a>
       </div>
     </div>
 
@@ -408,9 +408,11 @@ DW.trackOnce = function(name, data){
   /* ---------- share ---------- */
   var shareBtn = $('#shareBtn');
   shareBtn.addEventListener('click', function(){
-    var url  = 'https://mathlearningapp.darkwizlab.com';
-    var text = 'Free math app — 81 topics with live 3D figures and worked solutions. No sign-up.';
-    DW.track('share-click');
+    /* This page is on darkwizlab.com, so share the hub — it carries the math app
+       today and physics and chemistry when they land. */
+    var url  = 'https://darkwizlab.com';
+    var text = 'Free study tools that react — 81 math topics with live 3D figures and worked solutions. No sign-up, no ads.';
+    DW.track('share-click', {target: 'hub'});
     if (navigator.share) {
       navigator.share({title:'DarkWiz Lab', text:text, url:url}).catch(function(){});
       return;
