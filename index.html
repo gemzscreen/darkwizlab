@@ -353,8 +353,18 @@ input[type=range]::-moz-range-thumb{
 }
 .foot-links a{color:var(--muted); transition:.16s}
 .foot-links a:hover{color:var(--cyan)}
+.foot-strip{
+  display:flex; gap:10px; flex-wrap:wrap; margin-top:30px;
+}
+.strip-btn{
+  display:inline-flex; align-items:center; gap:8px; padding:11px 18px; border-radius:11px;
+  border:1px solid var(--line-hi); background:var(--field);
+  font-size:14px; font-weight:600; transition:transform .16s, border-color .18s;
+}
+.strip-btn:hover{transform:translateY(-2px); border-color:var(--cyan)}
+.strip-btn.accent{border-color:transparent; background:var(--grad); color:#fff}
 .foot-bar{
-  margin-top:34px; padding-top:20px; border-top:1px solid var(--hair);
+  margin-top:24px; padding-top:20px; border-top:1px solid var(--hair);
   display:flex; flex-wrap:wrap; gap:10px 18px; justify-content:space-between;
   font-family:'JetBrains Mono',monospace; font-size:11px; color:var(--muted-2);
 }
@@ -425,7 +435,7 @@ input[type=range]::-moz-range-thumb{
      detects whichever library is loaded, so no other line has to change.
      ════════════════════════════════════════════════════════════════ -->
 <script defer src="https://cloud.umami.is/script.js"
-        data-website-id="951c89f1-41d2-4e02-9ff6-b210edbc5896"
+        data-website-id="PASTE-YOUR-UMAMI-WEBSITE-ID"
         data-tag="hub"
         data-domains="darkwizlab.com,mathlearningapp.darkwizlab.com"></script>
 <script>
@@ -760,9 +770,7 @@ DW.trackOnce = function(name, data){
         <a class="btn btn-primary" href="https://mathlearningapp.darkwizlab.com">
           mathlearningapp.darkwizlab.com <span class="arw" aria-hidden="true">→</span>
         </a>
-        <a class="btn btn-ghost" href="mailto:hello@darkwizlab.com?subject=DarkWiz%20Lab%20—%20suggestion">
-          Suggest a topic
-        </a>
+        <a class="btn btn-ghost" href="/report.html?k=topic">Suggest a topic</a>
       </div>
     </div>
   </div>
@@ -782,7 +790,7 @@ DW.trackOnce = function(name, data){
         </a>
         <p class="foot-blurb">
           Small, fast, self-contained study tools for high school and college students.
-          Free to use and free of accounts, ads and trackers.
+          Free to use and free of accounts and ads.
         </p>
       </div>
 
@@ -798,9 +806,15 @@ DW.trackOnce = function(name, data){
         <b>Site</b>
         <a href="#inside">What's inside</a>
         <a href="#how">How a lesson runs</a>
-        <a href="mailto:hello@darkwizlab.com?subject=DarkWiz%20Lab%20—%20bug%20report">Report a problem</a>
+        <a href="/support.html">💙 Support</a>
+        <a href="/report.html">🐞 Report a problem</a>
         <a href="mailto:hello@darkwizlab.com">hello@darkwizlab.com</a>
       </nav>
+    </div>
+
+    <div class="foot-strip">
+      <a class="strip-btn accent" href="/support.html"><span aria-hidden="true">💙</span> Support</a>
+      <a class="strip-btn" href="/report.html"><span aria-hidden="true">🐞</span> Report</a>
     </div>
 
     <div class="foot-bar">

@@ -1,0 +1,433 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Support DarkWiz Lab — keep it free</title>
+<meta name="description" content="DarkWiz Lab is free, with no ads and no accounts. If it helped you, you can support it by GCash inside the Philippines or by Ko-fi from anywhere else.">
+<link rel="canonical" href="https://darkwizlab.com/support.html">
+<meta name="theme-color" content="#0B0E1F">
+<meta name="color-scheme" content="dark light">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="DarkWiz Lab">
+<meta property="og:url" content="https://darkwizlab.com/support.html">
+<meta property="og:title" content="Support DarkWiz Lab">
+<meta property="og:description" content="Free, and staying free. GCash for the Philippines, Ko-fi for everywhere else.">
+<meta property="og:image" content="https://darkwizlab.com/og-image.png">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%237B5CFF'/%3E%3Cstop offset='1' stop-color='%2322D3EE'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='15' fill='url(%23g)'/%3E%3Cpath d='M32 15 L48 47 H16 Z' fill='none' stroke='%23fff' stroke-width='5' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="shell.css">
+
+<!-- ═══ Analytics ═══════════════════════════════════════════════════════
+     Same Website ID as index.html and the math app. data-tag="hub".
+     ═════════════════════════════════════════════════════════════════════ -->
+<script defer src="https://cloud.umami.is/script.js"
+        data-website-id="PASTE-YOUR-UMAMI-WEBSITE-ID"
+        data-tag="hub"
+        data-domains="darkwizlab.com,mathlearningapp.darkwizlab.com"></script>
+<script>
+window.DW = window.DW || {};
+DW.site = "hub";
+DW.track = function(name, data){
+  try{
+    var d = Object.assign({site: DW.site}, data || {});
+    if (window.umami && typeof window.umami.track === 'function') window.umami.track(name, d);
+    else if (typeof window.gtag === 'function') window.gtag('event', name, d);
+  }catch(e){}
+};
+DW.trackOnce = function(name, data){
+  DW._seen = DW._seen || {};
+  if (DW._seen[name]) return;
+  DW._seen[name] = 1;
+  DW.track(name, data);
+};
+</script>
+
+<style>
+/* ---------- the two payment routes ---------- */
+.routes{display:grid; grid-template-columns:minmax(0,1fr); gap:16px; margin-bottom:16px}
+@media (min-width:760px){ .routes{grid-template-columns:repeat(2,minmax(0,1fr))} }
+
+.route{
+  border:1px solid var(--line); border-radius:20px; background:var(--panel);
+  padding:22px; display:flex; flex-direction:column; gap:14px;
+  box-shadow:var(--card-shadow); position:relative;
+}
+.route-top{display:flex; align-items:center; gap:12px}
+.route-flag{
+  width:42px; height:42px; border-radius:12px; background:var(--field);
+  border:1px solid var(--line); display:grid; place-items:center; flex:none;
+  color:var(--cyan);
+}
+.route-flag svg{display:block}
+.route h3{font-size:19px}
+.route-who{
+  font-family:'JetBrains Mono',monospace; font-size:10.5px; letter-spacing:.14em;
+  text-transform:uppercase; color:var(--cyan); margin-top:3px; display:block;
+}
+.route p{color:var(--muted); font-size:14.5px; line-height:1.68}
+.route-foot{padding-top:2px}
+
+/* QR */
+.qr-box{
+  background:#fff; border-radius:16px; padding:12px; width:100%; max-width:236px;
+  margin:2px auto 0; display:block;
+}
+.qr-box img{display:block; width:100%; height:auto; border-radius:6px}
+.qr-label{
+  font-family:'JetBrains Mono',monospace; font-size:10.5px; letter-spacing:.14em;
+  text-transform:uppercase; color:var(--muted-2); text-align:center; margin-bottom:10px;
+}
+.acct{
+  text-align:center; font-size:14px; color:var(--muted); margin-top:12px;
+}
+.acct b{
+  font-family:'JetBrains Mono',monospace; color:var(--ink); font-weight:700;
+  letter-spacing:.02em;
+}
+
+/* steps */
+.steps{display:flex; flex-direction:column; gap:9px; margin-top:6px; counter-reset:s}
+.step{display:flex; gap:11px; font-size:14.5px; color:var(--muted); line-height:1.62}
+.step::before{
+  counter-increment:s; content:counter(s);
+  font-family:'JetBrains Mono',monospace; font-size:11px; font-weight:700;
+  color:var(--violet); background:var(--field); border:1px solid var(--line);
+  width:23px; height:23px; border-radius:7px; display:grid; place-items:center; flex:none;
+  margin-top:1px;
+}
+.step b{color:var(--ink); font-weight:600}
+
+/* amount suggestions */
+.tiers{display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:9px; margin-top:12px}
+@media (min-width:560px){ .tiers{grid-template-columns:repeat(4,minmax(0,1fr))} }
+.tier{
+  border:1px solid var(--line); border-radius:13px; background:var(--sunken);
+  padding:13px 9px; text-align:center; transition:.16s;
+}
+.tier:hover{border-color:var(--line-hi)}
+.tier.on{border-color:var(--cyan); background:var(--field)}
+.tier-a{
+  font-family:'JetBrains Mono',monospace; font-weight:700; font-size:17px;
+  color:var(--ink); display:block;
+}
+.tier.on .tier-a{color:var(--cyan)}
+.tier-l{font-size:11.5px; color:var(--muted-2); display:block; margin-top:4px; line-height:1.4}
+
+.why-kofi{
+  display:flex; flex-direction:column; gap:9px; margin-top:4px;
+  padding:15px 16px; border-radius:14px; background:var(--sunken);
+  border:1px solid var(--line);
+}
+.why-row{display:flex; gap:10px; align-items:flex-start; font-size:14px; color:var(--muted)}
+.why-row i{font-style:normal; color:var(--lime); flex:none; font-size:12.5px; line-height:1.62}
+
+.copied{color:var(--lime)}
+</style>
+</head>
+<body>
+
+<header class="site-head" id="head">
+  <div class="wrap-wide head-row">
+    <a class="mark" href="/" aria-label="DarkWiz Lab home">
+      <span class="mark-badge" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M12 4 L20.5 19 H3.5 Z" stroke="#fff" stroke-width="2.4" stroke-linejoin="round"/></svg>
+      </span>
+      <span class="mark-name">DarkWiz <span>Lab</span></span>
+    </a>
+    <a class="back-link" href="/">← Home</a>
+    <button class="icon-btn" id="themeBtn" aria-label="Change appearance">🌗</button>
+  </div>
+</header>
+
+<main class="page">
+  <div class="wrap">
+
+    <div class="page-head">
+      <p class="eyebrow">Support</p>
+      <h1>Free, and <span class="grad-txt">staying free</span></h1>
+      <p class="sub">
+        81 math topics with 3D figures, worked solutions and thousands of practice
+        questions — no ads, no account, no paywall. Physics and chemistry are being
+        built the same way.
+      </p>
+    </div>
+
+    <div class="card">
+      <div class="card-head"><span class="card-dot"></span><h3>Why I'm asking</h3></div>
+      <p>
+        DarkWiz Lab is built and paid for by one person. There's no company behind it
+        and no advertiser to please — which is exactly why it can stay this direct.
+        But it still costs time and money to keep going, and the next round of work is
+        the expensive part.
+      </p>
+      <p><b>What your support goes to:</b></p>
+      <div class="facts">
+        <span class="fact"><i>▸</i><span>Physics and chemistry apps, built on the same engine</span></span>
+        <span class="fact"><i>▸</i><span>Games mode — speed drills and puzzle challenges</span></span>
+        <span class="fact"><i>▸</i><span>More worked examples and derivations on existing topics</span></span>
+        <span class="fact"><i>▸</i><span>Keeping everything free, with no ads and no accounts, forever</span></span>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-head"><span class="card-dot"></span><h3>Pick an amount</h3></div>
+      <p>
+        These are suggestions, not prices. Anything at all is genuinely useful, and
+        nothing here unlocks a feature — you already have all of them.
+      </p>
+      <div class="tiers" id="tiers">
+        <button class="tier" data-amt="50"><span class="tier-a">₱50</span><span class="tier-l">Say thanks</span></button>
+        <button class="tier" data-amt="150"><span class="tier-a">₱150</span><span class="tier-l">Fuel a new topic</span></button>
+        <button class="tier" data-amt="300"><span class="tier-a">₱300</span><span class="tier-l">Sponsor a subdiscipline</span></button>
+        <button class="tier" data-amt="500"><span class="tier-a">₱500</span><span class="tier-l">Back a whole branch</span></button>
+      </div>
+      <p class="note" id="tierNote">Tap one and the instructions below will name that amount. Or ignore them and send whatever you like.</p>
+    </div>
+
+    <!-- ═══ the two routes ═══ -->
+    <div class="routes">
+
+      <!-- Philippines -->
+      <article class="route">
+        <div class="route-top">
+          <span class="route-flag" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" width="21" height="21">
+                <circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="1.7"/>
+                <path d="M3.4 9.5h17.2M3.4 14.5h17.2" stroke="currentColor" stroke-width="1.7"/>
+                <path d="M12 3c2.6 2.5 2.6 15.5 0 18M12 3C9.4 5.5 9.4 18.5 12 21" stroke="currentColor" stroke-width="1.7"/>
+              </svg></span>
+          <div>
+            <h3>From the Philippines</h3>
+            <span class="route-who">GCash · Maya · any bank app</span>
+          </div>
+        </div>
+        <p>Scan this with GCash, Maya or your banking app. It's a QR Ph code, so it works from all of them.</p>
+
+        <div>
+          <div class="qr-label">QR Ph · InstaPay</div>
+          <div class="qr-box">
+            <img src="gcash-qr.png" alt="QR Ph code for sending money to GE**R T." width="480" height="480">
+          </div>
+          <div class="acct">Account name · <b>GE**R T.</b></div>
+        </div>
+
+        <div class="steps">
+          <div class="step"><span>Open <b>GCash</b>, Maya or your bank app and tap <b>Scan QR</b>.</span></div>
+          <div class="step"><span>Point it at the code. On a phone, screenshot it first and use <b>Upload QR</b> from your gallery.</span></div>
+          <div class="step"><span>Check the name shows as <b>GE**R T.</b> before you continue.</span></div>
+          <div class="step"><span>Enter <span id="amtPh">any amount</span> and confirm.</span></div>
+        </div>
+
+        <p class="note">
+          The code carries no fixed amount — you type whatever you want to give.
+        </p>
+      </article>
+
+      <!-- International -->
+      <article class="route">
+        <div class="route-top">
+          <span class="route-flag" aria-hidden="true">
+              <svg viewBox="0 0 24 24" fill="none" width="21" height="21">
+                <rect x="3.2" y="5.5" width="17.6" height="13" rx="2.4" stroke="currentColor" stroke-width="1.7"/>
+                <path d="M3.2 10h17.6" stroke="currentColor" stroke-width="1.7"/>
+                <path d="M6.6 14.2h4" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"/>
+              </svg></span>
+          <div>
+            <h3>From anywhere else</h3>
+            <span class="route-who">Ko-fi · card or PayPal</span>
+          </div>
+        </div>
+        <p>
+          Ko-fi takes cards and PayPal from most countries and passes on the full amount —
+          it doesn't take a cut of one-off donations.
+        </p>
+
+        <div class="steps">
+          <div class="step"><span>Tap the button below to open <b>Ko-fi</b> in a new tab.</span></div>
+          <div class="step"><span>Choose <b>card</b> or <b>PayPal</b> — no Ko-fi account needed.</span></div>
+          <div class="step"><span>Send <span id="amtIntl">any amount</span>. A message is welcome but optional.</span></div>
+        </div>
+
+        <div class="why-kofi">
+          <span class="why-row"><i>✓</i><span>Cards and PayPal, from most countries</span></span>
+          <span class="why-row"><i>✓</i><span>No Ko-fi account needed to send</span></span>
+          <span class="why-row"><i>✓</i><span>No cut taken from one-off donations</span></span>
+        </div>
+
+        <div class="route-foot">
+          <a class="btn btn-primary" id="kofiBtn" style="width:100%"
+             href="https://ko-fi.com/darkwizlab" target="_blank" rel="noopener">
+            Open Ko-fi ↗
+          </a>
+          <p class="note" style="text-align:center">
+            Shown in your own currency. <b>₱150</b> is roughly <b>$3</b>.
+          </p>
+        </div>
+      </article>
+    </div>
+
+    <div class="card">
+      <div class="card-head"><span class="card-dot"></span><h3>What you're supporting</h3></div>
+      <div class="facts">
+        <span class="fact"><i>✓</i><span><b>No ads.</b> Not now, not after you donate, not ever.</span></span>
+        <span class="fact"><i>✓</i><span><b>No account.</b> Nothing to sign up for, nothing to log into.</span></span>
+        <span class="fact"><i>✓</i><span><b>Nothing is locked.</b> Donating doesn't unlock anything, because nothing is locked to begin with.</span></span>
+        <span class="fact"><i>✓</i><span><b>Your work stays yours.</b> Answers and progress are saved in your own browser and never sent anywhere.</span></span>
+        <span class="fact"><i>✓</i><span><b>One file.</b> Save the math app and it keeps working, even with no connection.</span></span>
+      </div>
+      <p class="note">
+        For transparency: this site counts anonymous page visits so I can tell what people
+        actually use. No cookies, no personal data, nothing tied to you.
+      </p>
+    </div>
+
+    <div class="card">
+      <div class="card-head"><span class="card-dot"></span><h3>Can't donate right now?</h3></div>
+      <p>
+        That's completely fine — it's why there's no paywall. Sending it to one classmate
+        who's struggling with math helps just as much.
+      </p>
+      <div class="btn-row">
+        <button class="btn btn-ghost" id="shareBtn">Share DarkWiz Lab</button>
+        <a class="btn btn-ghost" href="https://mathlearningapp.darkwizlab.com">Back to studying →</a>
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<footer class="site-foot">
+  <div class="wrap-wide">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <a class="mark" href="/">
+          <span class="mark-badge" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none"><path d="M12 4 L20.5 19 H3.5 Z" stroke="#fff" stroke-width="2.4" stroke-linejoin="round"/></svg>
+          </span>
+          <span class="mark-name">DarkWiz <span>Lab</span></span>
+        </a>
+        <p class="foot-blurb">
+          Small, fast, self-contained study tools for high school and college students.
+          Free to use and free of accounts and ads.
+        </p>
+      </div>
+      <nav class="foot-links" aria-label="Apps">
+        <b>Apps</b>
+        <a href="https://mathlearningapp.darkwizlab.com">Math Learning App</a>
+        <a href="/#apps">Physics — in development</a>
+        <a href="/#apps">Chemistry — in development</a>
+      </nav>
+      <nav class="foot-links" aria-label="Site">
+        <b>Site</b>
+        <a href="/#inside">What's inside</a>
+        <a href="/support.html">Support</a>
+        <a href="/report.html">Report a problem</a>
+      </nav>
+    </div>
+    <div class="foot-bar">
+      <span>© <span id="yr">2026</span> DarkWiz Lab</span>
+      <span>Don't memorize math. Watch it work.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  'use strict';
+  var $ = function(s){ return document.querySelector(s); };
+  $('#yr').textContent = new Date().getFullYear();
+
+  /* ---------- theme: auto → light → dark (shared with index.html) ---------- */
+  var Theme = {
+    mode:'auto',
+    resolve:function(){
+      if(this.mode!=='auto') return this.mode;
+      return matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+    },
+    apply:function(){
+      var r=this.resolve();
+      document.documentElement.setAttribute('data-theme',r);
+      $('#themeBtn').textContent = this.mode==='auto' ? '🌗' : (this.mode==='light'?'☀️':'🌙');
+      var m=document.querySelector('meta[name=theme-color]');
+      if(m) m.setAttribute('content', r==='light' ? '#F3F6FB' : '#0B0E1F');
+    },
+    set:function(m){ this.mode=m; try{localStorage.setItem('dwl-theme',m);}catch(e){} this.apply(); }
+  };
+  try{ var sv=localStorage.getItem('dwl-theme'); if(sv) Theme.mode=sv; }catch(e){}
+  $('#themeBtn').addEventListener('click',function(){
+    var o=['auto','light','dark'];
+    Theme.set(o[(o.indexOf(Theme.mode)+1)%3]);
+  });
+  try{
+    matchMedia('(prefers-color-scheme: light)').addEventListener('change',function(){
+      if(Theme.mode==='auto') Theme.apply();
+    });
+  }catch(e){}
+  Theme.apply();
+
+  var head=$('#head');
+  window.addEventListener('scroll',function(){ head.classList.toggle('stuck',window.scrollY>8); },{passive:true});
+
+  /* ---------- amount suggestions ----------
+     Purely presentational: it fills the amount into the instructions and the
+     Ko-fi link. Nothing on this page ever touches a payment system. */
+  var PHP_PER_USD = 58;           // rough, only used to suggest a Ko-fi amount
+  var KOFI = 'https://ko-fi.com/darkwizlab';
+  var chosen = null;
+
+  function render(){
+    document.querySelectorAll('.tier').forEach(function(b){
+      b.classList.toggle('on', chosen !== null && +b.dataset.amt === chosen);
+    });
+    $('#amtPh').textContent  = chosen ? '₱' + chosen : 'any amount';
+    var usd = chosen ? Math.max(1, Math.round(chosen / PHP_PER_USD)) : null;
+    $('#amtIntl').textContent = usd ? '$' + usd + ' or so' : 'any amount';
+    $('#kofiBtn').setAttribute('href', KOFI);
+    $('#tierNote').textContent = chosen
+      ? 'Set to ₱' + chosen + (usd ? ' — about $' + usd + ' on Ko-fi.' : '.') + ' Tap again to clear it.'
+      : 'Tap one and the instructions below will name that amount. Or ignore them and send whatever you like.';
+  }
+  document.querySelectorAll('.tier').forEach(function(b){
+    b.addEventListener('click', function(){
+      var v = +b.dataset.amt;
+      chosen = (chosen === v) ? null : v;
+      render();
+      if (chosen) DW.track('support-tier', {amount: chosen});
+    });
+  });
+  render();
+
+  $('#kofiBtn').addEventListener('click', function(){
+    DW.track('support-kofi', {amount: chosen || 0});
+  });
+  DW.trackOnce('support-view');
+
+  /* ---------- share ---------- */
+  var shareBtn = $('#shareBtn');
+  shareBtn.addEventListener('click', function(){
+    var url  = 'https://mathlearningapp.darkwizlab.com';
+    var text = 'Free math app — 81 topics with live 3D figures and worked solutions. No sign-up.';
+    DW.track('share-click');
+    if (navigator.share) {
+      navigator.share({title:'DarkWiz Lab', text:text, url:url}).catch(function(){});
+      return;
+    }
+    var done = function(){
+      var old = shareBtn.textContent;
+      shareBtn.textContent = 'Link copied ✓';
+      shareBtn.classList.add('copied');
+      setTimeout(function(){ shareBtn.textContent = old; shareBtn.classList.remove('copied'); }, 2200);
+    };
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(url).then(done, function(){ prompt('Copy this link:', url); });
+    } else {
+      prompt('Copy this link:', url);
+    }
+  });
+})();
+</script>
+</body>
+</html>

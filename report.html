@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>Report a problem — DarkWiz Lab</title>
+<meta name="description" content="Found a wrong answer, a broken figure or a missing topic in DarkWiz Lab? Tell me about it. Every report is read.">
+<link rel="canonical" href="https://darkwizlab.com/report.html">
+<meta name="theme-color" content="#0B0E1F">
+<meta name="color-scheme" content="dark light">
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="DarkWiz Lab">
+<meta property="og:url" content="https://darkwizlab.com/report.html">
+<meta property="og:title" content="Report a problem — DarkWiz Lab">
+<meta property="og:description" content="Found a wrong answer or a missing topic? Tell me about it.">
+<meta property="og:image" content="https://darkwizlab.com/og-image.png">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%237B5CFF'/%3E%3Cstop offset='1' stop-color='%2322D3EE'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='15' fill='url(%23g)'/%3E%3Cpath d='M32 15 L48 47 H16 Z' fill='none' stroke='%23fff' stroke-width='5' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="shell.css">
+
+<script defer src="https://cloud.umami.is/script.js"
+        data-website-id="PASTE-YOUR-UMAMI-WEBSITE-ID"
+        data-tag="hub"
+        data-domains="darkwizlab.com,mathlearningapp.darkwizlab.com"></script>
+<script>
+window.DW = window.DW || {};
+DW.site = "hub";
+DW.track = function(name, data){
+  try{
+    var d = Object.assign({site: DW.site}, data || {});
+    if (window.umami && typeof window.umami.track === 'function') window.umami.track(name, d);
+    else if (typeof window.gtag === 'function') window.gtag('event', name, d);
+  }catch(e){}
+};
+DW.trackOnce = function(name, data){
+  DW._seen = DW._seen || {};
+  if (DW._seen[name]) return;
+  DW._seen[name] = 1;
+  DW.track(name, data);
+};
+</script>
+
+<style>
+.kind{
+  display:flex; gap:13px; align-items:flex-start; width:100%; text-align:left;
+  border:1px solid var(--line); border-radius:14px; background:var(--sunken);
+  padding:14px 15px; margin-bottom:9px; transition:.16s;
+}
+.kind:hover{border-color:var(--line-hi)}
+.kind.on{border-color:var(--cyan); background:var(--field)}
+.kind-i{font-size:19px; flex:none; line-height:1.35}
+.kind-n{font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:15.5px; display:block}
+.kind.on .kind-n{color:var(--cyan)}
+.kind-d{font-size:13.2px; color:var(--muted-2); display:block; margin-top:3px; line-height:1.55}
+
+.field{
+  width:100%; background:var(--sunken); border:1px solid var(--line); border-radius:12px;
+  padding:13px 14px; font-size:15px; color:var(--ink); resize:vertical; line-height:1.6;
+  font-family:inherit; transition:border-color .16s;
+}
+.field:focus{outline:none; border-color:var(--cyan)}
+.field::placeholder{color:var(--muted-2)}
+select.field{cursor:pointer; appearance:none;
+  background-image:linear-gradient(45deg,transparent 50%,var(--muted) 50%),
+                   linear-gradient(135deg,var(--muted) 50%,transparent 50%);
+  background-position:calc(100% - 19px) 21px, calc(100% - 14px) 21px;
+  background-size:5px 5px, 5px 5px; background-repeat:no-repeat; padding-right:38px}
+.count{font-family:'JetBrains Mono',monospace; font-size:11.5px; color:var(--muted-2);
+  text-align:right; margin-top:7px}
+.count.warn{color:var(--amber)}
+.field + .field{margin-top:10px}
+
+.diag{border:1px solid var(--line); border-radius:12px; background:var(--sunken);
+  overflow:hidden; margin-top:12px}
+.drow{display:flex; gap:12px; justify-content:space-between; align-items:baseline;
+  padding:9px 13px; border-bottom:1px solid var(--hair);
+  font-family:'JetBrains Mono',monospace; font-size:11.5px}
+.drow:last-child{border-bottom:0}
+.drow span{color:var(--muted-2); flex:none}
+.drow b{color:var(--ink); font-weight:500; text-align:right; word-break:break-word; min-width:0}
+
+.send-row{display:flex; flex-wrap:wrap; gap:10px; margin:20px 0 12px}
+.send-row .btn{flex:1; min-width:180px}
+.ok{color:var(--lime)}
+</style>
+</head>
+<body>
+
+<header class="site-head" id="head">
+  <div class="wrap-wide head-row">
+    <a class="mark" href="/" aria-label="DarkWiz Lab home">
+      <span class="mark-badge" aria-hidden="true">
+        <svg viewBox="0 0 24 24" fill="none"><path d="M12 4 L20.5 19 H3.5 Z" stroke="#fff" stroke-width="2.4" stroke-linejoin="round"/></svg>
+      </span>
+      <span class="mark-name">DarkWiz <span>Lab</span></span>
+    </a>
+    <a class="back-link" href="/">← Home</a>
+    <button class="icon-btn" id="themeBtn" aria-label="Change appearance">🌗</button>
+  </div>
+</header>
+
+<main class="page">
+  <div class="wrap">
+
+    <div class="page-head">
+      <p class="eyebrow">Report &amp; suggest</p>
+      <h1>Found a problem?<br><span class="grad-txt">Tell me about it.</span></h1>
+      <p class="sub">
+        Every topic was checked against hand calculations, but 81 topics is a lot of
+        arithmetic and things still slip through. A missing topic is worth reporting too.
+      </p>
+    </div>
+
+    <div class="card">
+      <div class="card-head"><span class="card-dot"></span><h3>What is this about?</h3></div>
+      <div id="kinds"></div>
+    </div>
+
+    <div class="card" id="whereCard">
+      <div class="card-head"><span class="card-dot"></span><h3 id="whereTitle">Where did you see it?</h3></div>
+      <select id="rptWhere" class="field">
+        <option value="">Not tied to one place</option>
+        <optgroup label="Math Learning App">
+          <option>Math app · Arithmetic</option>
+          <option>Math app · Number Theory</option>
+          <option>Math app · Algebra</option>
+          <option>Math app · Calculus</option>
+          <option>Math app · Trigonometry</option>
+          <option>Math app · Geometry</option>
+          <option>Math app · Quiz mode</option>
+        </optgroup>
+        <optgroup label="This website">
+          <option>darkwizlab.com · Home page</option>
+          <option>darkwizlab.com · Support page</option>
+          <option>darkwizlab.com · Somewhere else</option>
+        </optgroup>
+      </select>
+      <p class="note" id="whereNote">
+        If it happened inside a lesson or a quiz question, naming the branch makes it far
+        quicker to reproduce. For a wrong number in one specific topic, the report form
+        <a href="https://mathlearningapp.darkwizlab.com" style="color:var(--cyan)">inside the math app</a>
+        lets you pick the exact topic.
+      </p>
+    </div>
+
+    <div class="card">
+      <div class="card-head"><span class="card-dot"></span><h3>Tell me what happened</h3></div>
+      <textarea id="rptText" class="field" rows="6" maxlength="1200"></textarea>
+      <div class="count"><span id="rptLen">0</span> / 1200</div>
+      <input id="rptFrom" class="field" type="text" maxlength="80"
+             placeholder="Your name or email — optional, only if you want a reply">
+    </div>
+
+    <div class="card">
+      <div class="card-head"><span class="card-dot"></span><h3>Sent with your report</h3></div>
+      <p>
+        So the problem can be reproduced, these are attached automatically. Nothing else
+        is collected, and nothing is sent until you tap a button below.
+      </p>
+      <div class="diag" id="diag"></div>
+    </div>
+
+    <div class="send-row">
+      <button class="btn btn-primary" id="rptMail">Send by email</button>
+      <button class="btn btn-ghost" id="rptCopy">Copy the report</button>
+    </div>
+    <p class="note" style="text-align:center">
+      Your report opens in your own mail app, addressed to
+      <b>hello@darkwizlab.com</b>. You can read it before it goes.
+    </p>
+
+  </div>
+</main>
+
+<footer class="site-foot">
+  <div class="wrap-wide">
+    <div class="foot-grid">
+      <div class="foot-brand">
+        <a class="mark" href="/">
+          <span class="mark-badge" aria-hidden="true">
+            <svg viewBox="0 0 24 24" fill="none"><path d="M12 4 L20.5 19 H3.5 Z" stroke="#fff" stroke-width="2.4" stroke-linejoin="round"/></svg>
+          </span>
+          <span class="mark-name">DarkWiz <span>Lab</span></span>
+        </a>
+        <p class="foot-blurb">
+          Small, fast, self-contained study tools for high school and college students.
+          Free to use and free of accounts and ads.
+        </p>
+      </div>
+      <nav class="foot-links" aria-label="Apps">
+        <b>Apps</b>
+        <a href="https://mathlearningapp.darkwizlab.com">Math Learning App</a>
+        <a href="/#apps">Physics — in development</a>
+        <a href="/#apps">Chemistry — in development</a>
+      </nav>
+      <nav class="foot-links" aria-label="Site">
+        <b>Site</b>
+        <a href="/#inside">What's inside</a>
+        <a href="/support.html">Support</a>
+        <a href="/report.html">Report a problem</a>
+      </nav>
+    </div>
+    <div class="foot-bar">
+      <span>© <span id="yr">2026</span> DarkWiz Lab</span>
+      <span>Don't memorize math. Watch it work.</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function(){
+  'use strict';
+  var $ = function(s){ return document.querySelector(s); };
+  $('#yr').textContent = new Date().getFullYear();
+
+  /* ---------- theme ---------- */
+  var Theme = {
+    mode:'auto',
+    resolve:function(){
+      if(this.mode!=='auto') return this.mode;
+      return matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+    },
+    apply:function(){
+      var r=this.resolve();
+      document.documentElement.setAttribute('data-theme',r);
+      $('#themeBtn').textContent = this.mode==='auto' ? '🌗' : (this.mode==='light'?'☀️':'🌙');
+      var m=document.querySelector('meta[name=theme-color]');
+      if(m) m.setAttribute('content', r==='light' ? '#F3F6FB' : '#0B0E1F');
+    },
+    set:function(m){ this.mode=m; try{localStorage.setItem('dwl-theme',m);}catch(e){} this.apply(); }
+  };
+  try{ var sv=localStorage.getItem('dwl-theme'); if(sv) Theme.mode=sv; }catch(e){}
+  $('#themeBtn').addEventListener('click',function(){
+    var o=['auto','light','dark']; Theme.set(o[(o.indexOf(Theme.mode)+1)%3]);
+  });
+  try{
+    matchMedia('(prefers-color-scheme: light)').addEventListener('change',function(){
+      if(Theme.mode==='auto') Theme.apply();
+    });
+  }catch(e){}
+  Theme.apply();
+
+  var head=$('#head');
+  window.addEventListener('scroll',function(){ head.classList.toggle('stuck',window.scrollY>8); },{passive:true});
+
+  /* ---------- report ---------- */
+  var EMAIL = 'hello@darkwizlab.com';
+
+  var KINDS = [
+    {k:'bug',    i:'🐞', n:'Something is wrong',
+     d:'A wrong answer, a broken figure, a button that does nothing, text that overlaps.',
+     ph:'What did you do, what did you expect, and what happened instead? If a number looked wrong, copy it in — that helps most of all.'},
+    {k:'topic',  i:'➕', n:'Suggest a topic',
+     d:'A topic missing from a branch that already exists — say, Vectors or Matrices.',
+     ph:'Which topic, and what should it cover? A formula or an example is welcome.'},
+    {k:'branch', i:'🌿', n:'Suggest a subject',
+     d:'A whole subject that is not here yet — Probability and Statistics, Physics, Chemistry.',
+     ph:'Which subject, and roughly what should it start with?'},
+    {k:'other',  i:'💬', n:'Something else',
+     d:'A question, an idea, or a note about how the site reads or feels to use.',
+     ph:'Anything you want to say.'}
+  ];
+
+  var R = {kind:'bug', where:'', text:'', from:''};
+
+  function kindOf(k){ for(var i=0;i<KINDS.length;i++){ if(KINDS[i].k===k) return KINDS[i]; } return KINDS[0]; }
+
+  function diagnostics(){
+    var d = new Date();
+    return {
+      'Page'   : (location.hostname || 'local') + location.pathname,
+      'Sent'   : d.toISOString().slice(0,19).replace('T',' ') + ' UTC',
+      'Screen' : window.innerWidth + '×' + window.innerHeight + ' @' + (window.devicePixelRatio||1) + 'x',
+      'Theme'  : Theme.mode + ' → ' + (document.documentElement.getAttribute('data-theme')||'dark'),
+      'Browser': navigator.userAgent
+    };
+  }
+
+  function esc(s){ return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;'); }
+
+  function renderKinds(){
+    $('#kinds').innerHTML = KINDS.map(function(x){
+      return '<button class="kind' + (R.kind===x.k?' on':'') + '" data-kind="' + x.k + '">' +
+             '<span class="kind-i">' + x.i + '</span>' +
+             '<span><span class="kind-n">' + x.n + '</span>' +
+             '<span class="kind-d">' + x.d + '</span></span></button>';
+    }).join('');
+    document.querySelectorAll('.kind').forEach(function(b){
+      b.addEventListener('click', function(){
+        R.kind = b.dataset.kind;
+        if (R.kind==='branch' || R.kind==='other') R.where = '';
+        renderKinds(); syncKind();
+      });
+    });
+  }
+
+  function syncKind(){
+    var k = kindOf(R.kind);
+    var needsWhere = (R.kind==='bug' || R.kind==='topic');
+    $('#whereCard').style.display = needsWhere ? '' : 'none';
+    $('#whereTitle').textContent  = R.kind==='bug' ? 'Where did you see it?' : 'Which branch should it go in?';
+    $('#rptWhere').value = R.where;
+    $('#rptText').setAttribute('placeholder', k.ph);
+  }
+
+  function renderDiag(){
+    var d = diagnostics();
+    $('#diag').innerHTML = Object.keys(d).map(function(key){
+      return '<div class="drow"><span>' + key + '</span><b>' + esc(d[key]) + '</b></div>';
+    }).join('');
+  }
+
+  function reportText(){
+    var k = kindOf(R.kind), d = diagnostics();
+    var lines = [
+      k.n.toUpperCase() + ' — DarkWiz Lab (darkwizlab.com)',
+      '',
+      R.where ? 'Where: ' + R.where : 'Where: not tied to one place',
+      '',
+      'Details:',
+      R.text || '(none written)',
+      '',
+      R.from ? 'From: ' + R.from : 'From: not given',
+      '',
+      '--- technical details, included automatically ---'
+    ];
+    Object.keys(d).forEach(function(key){ lines.push(key + ': ' + d[key]); });
+    return lines.join('\n');
+  }
+
+  function mailto(){
+    var k = kindOf(R.kind);
+    var subj = '[DarkWiz Lab] ' + k.n + (R.where ? ' — ' + R.where : '');
+    return 'mailto:' + EMAIL + '?subject=' + encodeURIComponent(subj) +
+           '&body=' + encodeURIComponent(reportText());
+  }
+
+  var ta = $('#rptText'), cnt = $('#rptLen');
+  function setLen(){
+    cnt.textContent = ta.value.length;
+    cnt.parentNode.classList.toggle('warn', ta.value.length > 1100);
+  }
+  ta.addEventListener('input', function(){ R.text = ta.value; setLen(); });
+  $('#rptFrom').addEventListener('input', function(e){ R.from = e.target.value; });
+  $('#rptWhere').addEventListener('change', function(e){ R.where = e.target.value; });
+
+  function guard(){
+    if ((R.text||'').trim().length < 10){
+      ta.focus();
+      var old = ta.getAttribute('placeholder');
+      ta.setAttribute('placeholder', 'Add a little more detail first — at least a sentence.');
+      ta.style.borderColor = 'var(--amber)';
+      setTimeout(function(){ ta.setAttribute('placeholder', old); ta.style.borderColor=''; }, 2400);
+      return false;
+    }
+    return true;
+  }
+
+  $('#rptMail').addEventListener('click', function(){
+    if (!guard()) return;
+    DW.track('report-send', {kind: R.kind, method: 'email', where: R.where || 'unspecified'});
+    location.href = mailto();
+  });
+
+  var copyBtn = $('#rptCopy');
+  copyBtn.addEventListener('click', function(){
+    if (!guard()) return;
+    DW.track('report-send', {kind: R.kind, method: 'copy', where: R.where || 'unspecified'});
+    var txt = reportText();
+    var done = function(){
+      copyBtn.textContent = 'Copied ✓';
+      copyBtn.classList.add('ok');
+      setTimeout(function(){ copyBtn.textContent = 'Copy the report'; copyBtn.classList.remove('ok'); }, 2200);
+    };
+    if (navigator.clipboard && navigator.clipboard.writeText){
+      navigator.clipboard.writeText(txt).then(done, function(){ prompt('Copy this:', txt); });
+    } else {
+      prompt('Copy this:', txt);
+    }
+  });
+
+  /* Deep link: report.html?k=topic preselects a kind. */
+  try{
+    var q = new URLSearchParams(location.search).get('k');
+    if (q && KINDS.some(function(x){ return x.k === q; })) R.kind = q;
+  }catch(e){}
+
+  renderKinds(); syncKind(); renderDiag(); setLen();
+  DW.trackOnce('report-view');
+})();
+</script>
+</body>
+</html>
