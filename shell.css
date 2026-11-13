@@ -1,38 +1,39 @@
 /* ==========================================================
    DarkWiz Lab — shared page shell
-   Tokens are identical to index.html and the Math Learning App
-   so the whole estate reads as one product.
+   Matches the darkwizlab.com hub (drawing-set theme).
    ========================================================== */
+/* Tokens follow the hub's drawing-set palette: "light" = paper, "dark" = model space.
+   The old token names are kept so support.html and report.html need no markup changes. */
 :root, [data-theme="dark"]{
-  --bg:#0B0E1F; --bg-2:#070915;
-  --panel:#141A33; --panel-2:#1B2242;
-  --line:rgba(140,160,255,.14); --line-hi:rgba(140,160,255,.30);
-  --violet:#7B5CFF; --cyan:#22D3EE; --magenta:#FF5CA8; --lime:#7CFFB2; --amber:#FFC65C;
-  --ink:#EEF1FF; --muted:#8E97C4; --muted-2:#7C86B8;
-  --grad:linear-gradient(135deg,#7B5CFF 0%,#22D3EE 100%);
-  --grid:rgba(123,92,255,.06);
-  --glow-a:rgba(123,92,255,.30); --glow-b:rgba(34,211,238,.16);
-  --sunken:rgba(7,9,21,.5); --field:rgba(255,255,255,.05); --track:rgba(255,255,255,.09);
-  --card-shadow:none; --hair:rgba(140,160,255,.10);
+  --bg:#16191D; --bg-2:#121417;
+  --panel:#1E2227; --panel-2:#252A30;
+  --line:rgba(228,231,226,.13); --line-hi:rgba(228,231,226,.30);
+  --violet:#7FA6EE; --cyan:#7FA6EE; --magenta:#EE7466; --lime:#8FC79A; --amber:#F2B544;
+  --ink:#E4E7E2; --muted:#9AA3AC; --muted-2:#8C959E;
+  --grad:linear-gradient(#2F5FB8,#2F5FB8);
+  --grid:rgba(111,155,234,.07);
+  --glow-a:transparent; --glow-b:transparent;
+  --sunken:#191C20; --field:rgba(228,231,226,.05); --track:rgba(228,231,226,.14);
+  --card-shadow:none; --hair:rgba(228,231,226,.09);
 }
 [data-theme="light"]{
-  --bg:#F3F6FB; --bg-2:#E8EDF7; --panel:#FFFFFF; --panel-2:#FFFFFF;
-  --line:rgba(23,34,59,.12); --line-hi:rgba(83,48,220,.30);
-  --violet:#5330DC; --cyan:#0B7C93; --magenta:#C71B69; --lime:#0F8B52; --amber:#A96C08;
-  --ink:#17223B; --muted:#5A6780; --muted-2:#5F6884;
-  --grad:linear-gradient(135deg,#5330DC 0%,#0FA3C0 100%);
-  --grid:rgba(47,75,208,.06);
-  --glow-a:rgba(83,48,220,.12); --glow-b:rgba(15,163,192,.12);
-  --sunken:#F6F8FD; --field:#F6F8FD; --track:rgba(23,34,59,.10);
-  --card-shadow:0 6px 26px rgba(23,34,59,.07); --hair:rgba(23,34,59,.08);
+  --bg:#E6E9E4; --bg-2:#DDE1DB; --panel:#F5F6F2; --panel-2:#FFFFFF;
+  --line:rgba(23,32,42,.16); --line-hi:rgba(23,32,42,.34);
+  --violet:#1F4FA8; --cyan:#1F4FA8; --magenta:#B8372A; --lime:#2E7D4A; --amber:#9A6A0C;
+  --ink:#17202A; --muted:#56606A; --muted-2:#5D6670;
+  --grad:linear-gradient(#1F4FA8,#1F4FA8);
+  --grid:rgba(31,79,168,.07);
+  --glow-a:transparent; --glow-b:transparent;
+  --sunken:#ECEEE9; --field:rgba(23,32,42,.04); --track:rgba(23,32,42,.14);
+  --card-shadow:none; --hair:rgba(23,32,42,.10);
 }
 
 *{margin:0;padding:0;box-sizing:border-box;-webkit-tap-highlight-color:transparent}
 html{scroll-behavior:smooth}
 body{
   background:var(--bg); color:var(--ink);
-  font-family:'Inter',system-ui,-apple-system,sans-serif;
-  font-size:16px; line-height:1.6; overflow-x:hidden;
+  font-family:'Barlow',system-ui,-apple-system,sans-serif;
+  font-size:16.5px; line-height:1.6; overflow-x:hidden; font-variant-numeric:tabular-nums;
   -webkit-font-smoothing:antialiased;
 }
 body::before{
@@ -57,14 +58,14 @@ button{background:none;border:none;cursor:pointer}
 .wrap{width:min(760px,100% - 40px); margin-inline:auto}
 .wrap-wide{width:min(1180px,100% - 40px); margin-inline:auto}
 
-h1,h2,h3{font-family:'Space Grotesk',sans-serif; line-height:1.09; letter-spacing:-.025em;
-  font-weight:700; overflow-wrap:break-word}
+h1,h2,h3{font-family:'Barlow Condensed','Arial Narrow',sans-serif; line-height:1.05; letter-spacing:-.005em;
+  font-weight:600; overflow-wrap:break-word}
 h1{font-size:clamp(32px,5.4vw,52px)}
 h3{font-size:18px; letter-spacing:-.01em}
 .grad-txt{background:var(--grad); -webkit-background-clip:text; background-clip:text; color:transparent}
 .sub{color:var(--muted); font-size:clamp(15px,1.5vw,17.5px); line-height:1.7; max-width:62ch}
 .eyebrow{
-  font-family:'JetBrains Mono',monospace; font-size:11px; font-weight:500;
+  font-family:'Barlow',sans-serif; font-size:11px; font-weight:500;
   letter-spacing:.22em; text-transform:uppercase; color:var(--muted-2);
   display:flex; align-items:center; gap:10px;
 }
@@ -80,9 +81,9 @@ h3{font-size:18px; letter-spacing:-.01em}
 .site-head.stuck{border-bottom-color:var(--line)}
 .head-row{display:flex; align-items:center; gap:14px; height:66px}
 .mark{display:flex; align-items:center; gap:11px; margin-right:auto}
-.mark-badge{width:34px;height:34px;border-radius:10px;background:var(--grad);display:grid;place-items:center;flex:none}
+.mark-badge{width:34px;height:34px;border-radius:6px;background:var(--grad);display:grid;place-items:center;flex:none}
 .mark-badge svg{width:19px;height:19px;display:block}
-.mark-name{font-family:'Space Grotesk',sans-serif;font-weight:700;font-size:17.5px;
+.mark-name{font-family:'Barlow Condensed','Arial Narrow',sans-serif;font-weight:700;font-size:17.5px;
   letter-spacing:-.02em;white-space:nowrap}
 .mark-name span{color:var(--muted);font-weight:500}
 .icon-btn{width:36px;height:36px;border-radius:10px;border:1px solid var(--line);
@@ -97,7 +98,7 @@ h3{font-size:18px; letter-spacing:-.01em}
 
 /* ---------- cards ---------- */
 .card{
-  border:1px solid var(--line); border-radius:18px; background:var(--panel);
+  border:1px solid var(--line); border-radius:3px; background:var(--panel);
   padding:22px 22px 24px; margin-bottom:16px; box-shadow:var(--card-shadow);
 }
 .card-head{display:flex;align-items:center;gap:11px;margin-bottom:12px}
@@ -105,7 +106,7 @@ h3{font-size:18px; letter-spacing:-.01em}
 .card p{color:var(--muted);font-size:15px;line-height:1.7}
 .card p + p{margin-top:11px}
 .note{
-  font-family:'JetBrains Mono',monospace; font-size:12px; color:var(--muted-2);
+  font-family:'Barlow',sans-serif; font-size:12px; color:var(--muted-2);
   line-height:1.72; margin-top:12px;
 }
 .note b{color:var(--ink);font-weight:500}
@@ -113,10 +114,10 @@ h3{font-size:18px; letter-spacing:-.01em}
 /* ---------- buttons ---------- */
 .btn{
   display:inline-flex;align-items:center;justify-content:center;gap:9px;
-  padding:13px 20px;border-radius:12px;font-weight:600;font-size:14.5px;
+  padding:13px 20px;border-radius:4px;font-weight:600;font-size:14.5px;
   border:1px solid transparent;transition:transform .16s,border-color .18s,box-shadow .22s;
 }
-.btn-primary{background:var(--grad);color:#fff;box-shadow:0 10px 30px -12px var(--violet)}
+.btn-primary{background:var(--grad);color:#fff}
 .btn-primary:hover{transform:translateY(-2px)}
 .btn-ghost{border-color:var(--line-hi);background:var(--field)}
 .btn-ghost:hover{transform:translateY(-2px);border-color:var(--cyan)}
@@ -134,13 +135,13 @@ h3{font-size:18px; letter-spacing:-.01em}
 .foot-grid{display:flex;flex-wrap:wrap;gap:26px 40px;align-items:flex-start}
 .foot-blurb{color:var(--muted);font-size:13.5px;max-width:38ch;margin-top:12px;line-height:1.7}
 .foot-links{display:flex;flex-direction:column;gap:9px;font-size:13.5px}
-.foot-links b{font-family:'JetBrains Mono',monospace;font-size:10px;letter-spacing:.16em;
+.foot-links b{font-family:'Barlow',sans-serif;font-size:10px;letter-spacing:.16em;
   text-transform:uppercase;color:var(--muted-2);font-weight:500;margin-bottom:3px}
 .foot-links a{color:var(--muted);transition:.16s}
 .foot-links a:hover{color:var(--cyan)}
 .foot-bar{margin-top:32px;padding-top:20px;border-top:1px solid var(--hair);
   display:flex;flex-wrap:wrap;gap:10px 18px;justify-content:space-between;
-  font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--muted-2)}
+  font-family:'Barlow',sans-serif;font-size:11px;color:var(--muted-2)}
 
 @media (min-width:940px){
   .foot-grid{flex-wrap:nowrap;gap:60px}
