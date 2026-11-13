@@ -1,6 +1,6 @@
 # darkwizlab.com
 
-Landing page for **DarkWiz Lab** — the hub that points to each subject app on its own subdomain.
+Landing page for **DarkWiz Lab**: the hub for Gemz's vibe-coded civil engineering, QS and site apps. The page is designed as a drawing set; each app is a sheet in the drawing register.
 
 | File | What it is |
 | --- | --- |
@@ -71,16 +71,20 @@ out for a while — that is normal.
 
 ## Editing
 
-Everything lives in `index.html`.
+Everything for the home page lives in `index.html`. `support.html` and `report.html`
+share `shell.css`, which uses the same palette.
 
-- **Add or promote a subject app:** copy an `<article class="app">` block in the
-  `#apps` section. A shipped app gets `class="app is-live"`, a `<span class="chip live">Live</span>`
-  and a real link. Unshipped apps get `chip build` or `chip queue` and a
-  `<span class="soon-note">` instead of a button.
-- **Counts** (6 / 16 / 81 / 385) live in the `.stats` block in `#inside`.
-- **Colours and fonts** are the CSS variables at the top, copied verbatim from the
-  math app so the two stay in sync. Change them in one place.
-- **Contact address** is `hello@darkwizlab.com`, used in three `mailto:` links.
+- **Add an app:** copy an `<article class="row">` block in `#regList`. Give it a sheet
+  number by discipline (`QS-1xx` quantity surveying, `ST-2xx` structural, `RV-3xx` review,
+  `FD-4xx` field), set `data-d` to `qs`, `st`, `rv` or `fd`, then update the count in the
+  matching filter button and the "8 apps" figure in the hero.
+- **Status stamps:** `stamp use` (In use), `stamp rev` (Under revision), `stamp priv`
+  (Private build). A row with `class="row is-rev"` plus the `.cloud` and `.delta` SVGs gets
+  the red revision cloud.
+- **Colours and fonts** are the CSS variables at the top. `paper` is the light sheet view,
+  `model` is the dark CAD model-space view. Fonts are Barlow and Barlow Condensed.
+- **Ko-fi:** `https://ko-fi.com/darkwizlab`, used in the header, hero, support panel and footer.
+- **Contact address** is `hello@darkwizlab.com`.
 
-The hero demo ("Bench 01") is plain SVG driven by the script at the bottom of the
-file. It pauses when scrolled out of view or when the tab is hidden.
+The hero figure is a simply supported beam drawn in plain SVG by the script at the bottom
+of `index.html`: R_A = P·b/L, R_B = P·a/L, M_max = P·a·b/L. Drag the load or use the sliders.

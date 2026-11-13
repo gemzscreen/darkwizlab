@@ -6,7 +6,7 @@
 <title>Report a problem — DarkWiz Lab</title>
 <meta name="description" content="Found a wrong answer, a broken figure or a missing topic in DarkWiz Lab? Tell me about it. Every report is read.">
 <link rel="canonical" href="https://darkwizlab.com/report.html">
-<meta name="theme-color" content="#0B0E1F">
+<meta name="theme-color" content="#16191D">
 <meta name="color-scheme" content="dark light">
 <meta property="og:type" content="website">
 <meta property="og:site_name" content="DarkWiz Lab">
@@ -14,10 +14,10 @@
 <meta property="og:title" content="Report a problem — DarkWiz Lab">
 <meta property="og:description" content="Found a wrong answer or a missing topic? Tell me about it.">
 <meta property="og:image" content="https://darkwizlab.com/og-image.png">
-<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0' stop-color='%237B5CFF'/%3E%3Cstop offset='1' stop-color='%2322D3EE'/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect width='64' height='64' rx='15' fill='url(%23g)'/%3E%3Cpath d='M32 15 L48 47 H16 Z' fill='none' stroke='%23fff' stroke-width='5' stroke-linejoin='round'/%3E%3C/svg%3E">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%2317202A'/%3E%3Cpath d='M18 22 H46 L32 42 Z' fill='none' stroke='%23F5F6F2' stroke-width='4.5' stroke-linejoin='round'/%3E%3Cpath d='M10 46 H54' stroke='%236F9BEA' stroke-width='4.5' stroke-linecap='round'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@500;600;700&family=Barlow:wght@400;500;600;700&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="shell.css">
 
 <script defer src="https://cloud.umami.is/script.js"
@@ -51,7 +51,7 @@ DW.trackOnce = function(name, data){
 .kind:hover{border-color:var(--line-hi)}
 .kind.on{border-color:var(--cyan); background:var(--field)}
 .kind-i{font-size:19px; flex:none; line-height:1.35}
-.kind-n{font-family:'Space Grotesk',sans-serif; font-weight:600; font-size:15.5px; display:block}
+.kind-n{font-family:'Barlow Condensed','Arial Narrow',sans-serif; font-weight:600; font-size:15.5px; display:block}
 .kind.on .kind-n{color:var(--cyan)}
 .kind-d{font-size:13.2px; color:var(--muted-2); display:block; margin-top:3px; line-height:1.55}
 
@@ -67,7 +67,7 @@ select.field{cursor:pointer; appearance:none;
                    linear-gradient(135deg,var(--muted) 50%,transparent 50%);
   background-position:calc(100% - 19px) 21px, calc(100% - 14px) 21px;
   background-size:5px 5px, 5px 5px; background-repeat:no-repeat; padding-right:38px}
-.count{font-family:'JetBrains Mono',monospace; font-size:11.5px; color:var(--muted-2);
+.count{font-family:'Barlow',sans-serif; font-size:11.5px; color:var(--muted-2);
   text-align:right; margin-top:7px}
 .count.warn{color:var(--amber)}
 .field + .field{margin-top:10px}
@@ -76,7 +76,7 @@ select.field{cursor:pointer; appearance:none;
   overflow:hidden; margin-top:12px}
 .drow{display:flex; gap:12px; justify-content:space-between; align-items:baseline;
   padding:9px 13px; border-bottom:1px solid var(--hair);
-  font-family:'JetBrains Mono',monospace; font-size:11.5px}
+  font-family:'Barlow',sans-serif; font-size:11.5px}
 .drow:last-child{border-bottom:0}
 .drow span{color:var(--muted-2); flex:none}
 .drow b{color:var(--ink); font-weight:500; text-align:right; word-break:break-word; min-width:0}
@@ -92,7 +92,7 @@ select.field{cursor:pointer; appearance:none;
   <div class="wrap-wide head-row">
     <a class="mark" href="/" aria-label="DarkWiz Lab home">
       <span class="mark-badge" aria-hidden="true">
-        <svg viewBox="0 0 24 24" fill="none"><path d="M12 4 L20.5 19 H3.5 Z" stroke="#fff" stroke-width="2.4" stroke-linejoin="round"/></svg>
+        <svg viewBox="0 0 24 24" fill="none"><path d="M6 6 H18 L12 15 Z" stroke="#fff" stroke-width="2.2" stroke-linejoin="round"/><path d="M3 19.5 H21" stroke="#fff" stroke-width="2.2" stroke-linecap="round"/></svg>
       </span>
       <span class="mark-name">DarkWiz <span>Lab</span></span>
     </a>
@@ -106,10 +106,10 @@ select.field{cursor:pointer; appearance:none;
 
     <div class="page-head">
       <p class="eyebrow">Report &amp; suggest</p>
-      <h1>Found a problem?<br><span class="grad-txt">Tell me about it.</span></h1>
+      <h1>Found a problem?<br>Tell me about it.</h1>
       <p class="sub">
-        Every topic was checked against hand calculations, but 81 topics is a lot of
-        arithmetic and things still slip through. A missing topic is worth reporting too.
+        Every app is checked against hand calculations, but things still slip through.
+        A wrong rate, a code clause that doesn't match, or a tool you wish existed are all worth reporting.
       </p>
     </div>
 
@@ -122,6 +122,14 @@ select.field{cursor:pointer; appearance:none;
       <div class="card-head"><span class="card-dot"></span><h3 id="whereTitle">Where did you see it?</h3></div>
       <select id="rptWhere" class="field">
         <option value="">Not tied to one place</option>
+        <optgroup label="Apps">
+          <option>QS Estimator</option>
+          <option>QS Reports</option>
+          <option>Construction Toolkit</option>
+          <option>STRUCTEST</option>
+          <option>CE Board Reviewer</option>
+          <option>BM Translator</option>
+        </optgroup>
         <optgroup label="Math Learning App">
           <option>Math app · Arithmetic</option>
           <option>Math app · Number Theory</option>
@@ -180,31 +188,32 @@ select.field{cursor:pointer; appearance:none;
       <div class="foot-brand">
         <a class="mark" href="/">
           <span class="mark-badge" aria-hidden="true">
-            <svg viewBox="0 0 24 24" fill="none"><path d="M12 4 L20.5 19 H3.5 Z" stroke="#fff" stroke-width="2.4" stroke-linejoin="round"/></svg>
+            <svg viewBox="0 0 24 24" fill="none"><path d="M6 6 H18 L12 15 Z" stroke="#fff" stroke-width="2.2" stroke-linejoin="round"/><path d="M3 19.5 H21" stroke="#fff" stroke-width="2.2" stroke-linecap="round"/></svg>
           </span>
           <span class="mark-name">DarkWiz <span>Lab</span></span>
         </a>
         <p class="foot-blurb">
-          Small, fast, self-contained study tools for high school and college students.
-          Free to use and free of accounts and ads.
+          Web apps for civil engineering, estimating and site work,
+          built by a civil engineer and checked against hand calcs.
         </p>
       </div>
       <nav class="foot-links" aria-label="Apps">
         <b>Apps</b>
-        <a href="https://mathlearningapp.darkwizlab.com">Math Learning App</a>
-        <a href="/#apps">Physics — in development</a>
-        <a href="/#apps">Chemistry — in development</a>
+        <a href="https://qs.darkwizlab.com">QS Estimator</a>
+        <a href="https://ct.darkwizlab.com">Construction Toolkit</a>
+        <a href="https://gemzscreen.github.io/bm-translator/">BM Translator</a>
+        <a href="/#register">All projects</a>
       </nav>
       <nav class="foot-links" aria-label="Site">
         <b>Site</b>
-        <a href="/#inside">What's inside</a>
+        <a href="/#register">Drawing register</a>
         <a href="/support.html">Support</a>
         <a href="/report.html">Report a problem</a>
       </nav>
     </div>
     <div class="foot-bar">
       <span>© <span id="yr">2026</span> DarkWiz Lab</span>
-      <span>Don't memorize math. Watch it work.</span>
+      <span>Tools a civil engineer actually uses.</span>
     </div>
   </div>
 </footer>
@@ -256,7 +265,7 @@ select.field{cursor:pointer; appearance:none;
      d:'A topic missing from a branch that already exists — say, Vectors or Matrices.',
      ph:'Which topic, and what should it cover? A formula or an example is welcome.'},
     {k:'branch', i:'🌿', n:'Suggest a subject',
-     d:'A whole subject that is not here yet — Probability and Statistics, Physics, Chemistry.',
+     d:'A tool or subject that is not here yet, like a new QS trade, a code check or a reviewer subject.',
      ph:'Which subject, and roughly what should it start with?'},
     {k:'other',  i:'💬', n:'Something else',
      d:'A question, an idea, or a note about how the site reads or feels to use.',
