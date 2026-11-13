@@ -2,6 +2,10 @@
 
 Generated from `version.js` by `node scripts/version.mjs changelog`. Do not edit by hand.
 
+## 2.0.1 (2026-11-13): Footer alignment fix
+
+- Revision history link now sits on the same line as the other footer links.
+
 ## 2.0.0 (2026-11-13): Project hub redesign
 
 - Home page rebuilt as a drawing set, with a live beam figure that redraws its shear and moment diagrams.
