@@ -15,9 +15,17 @@
               minor (2.1.0) = a new app or section
               major (3.0.0) = a redesign
    ========================================================== */
-window.DWL_VERSION = "2.0.0";
+window.DWL_VERSION = "2.0.1";
 
 window.DWL_CHANGELOG = [
+  {
+    v: "2.0.1",
+    date: "2026-11-13",
+    title: "Footer alignment fix",
+    notes: [
+      "Revision history link now sits on the same line as the other footer links."
+    ]
+  },
   {
     v: "2.0.0",
     date: "2026-11-13",
