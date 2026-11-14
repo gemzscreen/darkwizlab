@@ -1,6 +1,6 @@
 # darkwizlab.com
 
-Landing page for **DarkWiz Lab**: the hub for a set of civil engineering, QS and site apps. The page is designed as a drawing set; each app is a sheet in the drawing register.
+Landing page for **DarkWiz Lab**: the hub for a set of civil engineering, QS and site apps. The page is designed as a drawing set; each app is a sheet in the Premium Apps register.
 
 | File | What it is |
 | --- | --- |
