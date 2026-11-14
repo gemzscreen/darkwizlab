@@ -234,7 +234,7 @@ input[type=range]::-moz-range-thumb{width:14px;height:14px;border-radius:50%;bac
 .step p{color:var(--graphite);max-width:60ch}
 
 /* ---------- builder + support ---------- */
-.split{display:grid;grid-template-columns:minmax(0,1fr);gap:28px}
+.split{display:grid;grid-template-columns:minmax(0,1fr);gap:28px;align-items:start}
 .panel{border:1px solid var(--rule-hi);background:var(--sheet);padding:clamp(22px,3.4vw,34px);display:flex;flex-direction:column;gap:14px}
 .panel h3{font-size:32px}
 .panel p{color:var(--graphite)}
@@ -242,6 +242,10 @@ input[type=range]::-moz-range-thumb{width:14px;height:14px;border-radius:50%;bac
 .cred{background:var(--sheet);padding:12px 14px}
 .cred b{display:block;font-family:'Barlow Condensed',sans-serif;font-size:22px;font-weight:600;line-height:1.1}
 .cred span{font-size:14px;color:var(--graphite)}
+.idea-band{display:grid;grid-template-columns:minmax(0,1fr);gap:22px;align-items:center;
+  border:2px solid var(--ink);background:var(--sheet);padding:clamp(24px,4vw,44px)}
+.idea-band h2{margin-bottom:12px}
+.cred-wide{grid-column:1 / -1}
 .support-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:auto;padding-top:8px}
 
 /* ---------- footer: the sheet's title block ---------- */
@@ -256,32 +260,12 @@ input[type=range]::-moz-range-thumb{width:14px;height:14px;border-radius:50%;bac
 .tbf-brand .mark-name{font-size:30px}
 .tbf-links{grid-column:1 / -1;display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 20px;font-size:15.5px;line-height:1.6}
 .foot-note{margin-top:14px;font-size:13.5px;color:var(--graphite)}
-.rev-btn{font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:21px;color:var(--blue);text-align:left;
-  text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:4px}
-.rev-btn:hover{text-decoration-thickness:2px}
-.link-btn{color:var(--blue);font-weight:500;font-size:inherit;line-height:inherit;padding:0;margin:0;text-align:left}
-.link-btn:hover{text-decoration:underline}
 
-/* revision history: laid out like a drawing's revision block */
-.rev-dlg{margin:auto;width:min(720px,100% - 28px);max-height:min(80vh,720px);background:var(--sheet);color:var(--ink);
-  border:2px solid var(--ink);border-radius:2px;padding:22px 22px 24px}
-.rev-dlg::backdrop{background:rgba(10,14,20,.55)}
-.rev-head{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:6px}
-.rev-head h2{font-size:34px}
-.rev-table{width:100%;border-collapse:collapse;margin-top:16px;font-size:15px}
-.rev-table th{text-align:left;font-weight:500;font-size:13.5px;color:var(--graphite);border-bottom:1.5px solid var(--ink);padding:6px 10px}
-.rev-table td{vertical-align:top;border-bottom:1px solid var(--rule);padding:10px}
-.rev-table td:first-child{font-family:'Barlow Condensed',sans-serif;font-weight:600;font-size:20px;white-space:nowrap}
-.rev-table td:nth-child(2){white-space:nowrap;color:var(--graphite)}
-.rev-table b{display:block;font-weight:600;margin-bottom:2px}
-.rev-table ul{padding-left:18px;color:var(--graphite)}
-.rev-table tr.current td:first-child{color:var(--red)}
-@media (max-width:520px){ .rev-table td:nth-child(2){white-space:normal} .rev-table td,.rev-table th{padding:8px 6px} }
 
 /* ---------- responsive ---------- */
 @media (min-width:700px){
   .split{grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr)}
-  .titleblock{grid-template-columns:2fr 1fr 1fr 1fr 1fr}
+  .titleblock{grid-template-columns:2.2fr 1fr 1fr 1fr}
   .tbf-brand{grid-column:auto;grid-row:span 2}
   .tbf-links{grid-column:2 / -1}
 }
@@ -293,6 +277,7 @@ input[type=range]::-moz-range-thumb{width:14px;height:14px;border-radius:50%;bac
   .row{grid-template-columns:110px minmax(0,1fr) 230px;gap:24px;padding:28px 24px}
   .row-side{flex-direction:column;align-items:flex-start;gap:12px}
   .open-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:24px}
+  .idea-band{grid-template-columns:minmax(0,1fr) auto;gap:40px}
   .steps{grid-template-columns:repeat(4,minmax(0,1fr));gap:0 28px;border-top:0}
   .step{grid-template-columns:minmax(0,1fr);border-top:2px solid var(--ink);border-bottom:0;padding-top:18px}
   .step::before{grid-row:auto;margin-bottom:10px}
@@ -369,8 +354,9 @@ try{ var v = localStorage.getItem('dwl-view'); if(v === 'model' || v === 'paper'
     <nav class="nav" aria-label="Sections">
       <a href="#open">Free apps</a>
       <a href="#register">Register</a>
-      <a href="#method">How they're built</a>
+      <a href="#method">Where ideas start</a>
       <a href="#builder">About</a>
+      <a href="/build.html">Your idea</a>
     </nav>
     <button class="view-btn" id="viewBtn" aria-label="Switch between paper and model space view">
       <span data-v="paper">Paper</span><span data-v="model">Model</span>
@@ -577,7 +563,7 @@ try{ var v = localStorage.getItem('dwl-view'); if(v === 'model' || v === 'paper'
       <article class="row" data-d="qs">
         <div class="sheet-no">QS-101<small>Quantity surveying</small></div>
         <div class="row-main">
-          <div class="row-title"><h3>Keystone</h3></div>
+          <div class="row-title"><h3>Kestrel</h3></div>
           <span class="row-url">Estimating and cost control</span>
           <p>Take-off, DUPA, bill of quantities, cost control and progress billing for Philippine projects.
              Seventeen scope sheets in construction order, metric or imperial, peso or dollar.</p>
@@ -593,9 +579,9 @@ try{ var v = localStorage.getItem('dwl-view'); if(v === 'model' || v === 'paper'
       <article class="row" data-d="qs">
         <div class="sheet-no">QS-102<small>Quantity surveying</small></div>
         <div class="row-main">
-          <div class="row-title"><h3>Benchmark</h3></div>
+          <div class="row-title"><h3>Heron</h3></div>
           <span class="row-url">Portfolio reporting</span>
-          <p>Portfolio view, rate benchmarking, billing and material spend across every Keystone
+          <p>Portfolio view, rate benchmarking, billing and material spend across every Kestrel
              project, in one set of reports.</p>
           <div class="refs"><span class="ref">Rate benchmarks</span><span class="ref">Billing</span><span class="ref">Material spend</span></div>
         </div>
@@ -609,10 +595,11 @@ try{ var v = localStorage.getItem('dwl-view'); if(v === 'model' || v === 'paper'
       <article class="row" data-d="qs">
         <div class="sheet-no">QS-103<small>Quantity surveying</small></div>
         <div class="row-main">
-          <div class="row-title"><h3>Cofferdam</h3></div>
-          <span class="row-url">Tender register and supplier quotations</span>
-          <p>Tender register, priced BQs, supplier requests for quotation on company letterhead,
-             quotation comparison and approval packs, bid results and as-built reports.</p>
+          <div class="row-title"><h3>Falcon</h3></div>
+          <span class="row-url">QS CRM and RFQ system</span>
+          <p>Client and tender register, priced BQs, requests for quotation to suppliers on company
+             letterhead, quotation comparison and approval packs, bid results and as-built reports,
+             with role-based access for the QS team.</p>
           <div class="refs"><span class="ref">Role-based sign-in</span><span class="ref">Quotation PDFs</span><span class="ref">Bid analytics</span></div>
         </div>
         <div class="row-side">
@@ -625,7 +612,7 @@ try{ var v = localStorage.getItem('dwl-view'); if(v === 'model' || v === 'paper'
       <article class="row" data-d="qs">
         <div class="sheet-no">QS-104<small>Quantity surveying</small></div>
         <div class="row-main">
-          <div class="row-title"><h3>Gantry</h3></div>
+          <div class="row-title"><h3>Osprey</h3></div>
           <span class="row-url">Project control and procurement</span>
           <p>Project control in one place: PERT/CPM and Gantt, BOQ and BOM, billing, plan against actual,
              a material, labour and equipment database, and quick quotations to Excel or PDF.</p>
@@ -641,7 +628,7 @@ try{ var v = localStorage.getItem('dwl-view'); if(v === 'model' || v === 'paper'
       <article class="row" data-d="st">
         <div class="sheet-no">ST-201<small>Structural</small></div>
         <div class="row-main">
-          <div class="row-title"><h3>Plumbline</h3></div>
+          <div class="row-title"><h3>Swift</h3></div>
           <span class="row-url">Structural test bench</span>
           <p>RC beam, one-way slab, steel column buckling, bridge span, truss and frame geometry,
              each checked against code with the working shown.</p>
@@ -659,7 +646,7 @@ try{ var v = localStorage.getItem('dwl-view'); if(v === 'model' || v === 'paper'
         <svg class="delta" viewBox="0 0 34 30" aria-hidden="true"><path d="M17 3 L31 27 H3 Z"/><text x="17" y="24" text-anchor="middle">2</text></svg>
         <div class="sheet-no">RV-301<small>Review</small></div>
         <div class="row-main">
-          <div class="row-title"><h3>Lintel</h3></div>
+          <div class="row-title"><h3>Wren</h3></div>
           <span class="row-url">Licensure exam reviewer</span>
           <p>Practice for the civil engineering board exam: MSTE, HGE and PSAD sets, redrawn exam
              figures, self-study lectures and a record of how you're scoring by topic.</p>
@@ -680,31 +667,47 @@ try{ var v = localStorage.getItem('dwl-view'); if(v === 'model' || v === 'paper'
     <div class="sect-head">
       <h2>Method statement</h2>
       <p class="lede">
-        These are vibe coded: I describe the job, an AI writes the code, and I check the output the way
-        I'd check a calculation sheet before it goes out. Every app goes through the same four steps.
+        None of these started as an idea for software. Each one started as a problem on a real job,
+        and it goes through the same four steps before it becomes an app.
       </p>
     </div>
     <div class="steps">
       <article class="step">
-        <h3>Start from a site problem</h3>
-        <p>Each app begins with a task that was eating hours on a real project: a BOQ, a supplier chase,
-           a code check, or a sign in a language I couldn't read.</p>
+        <h3>Notice the repeat</h3>
+        <p>It starts on a project: a take-off redone for the third time, a supplier quote chased again,
+           a check worked out by hand one more time.</p>
       </article>
       <article class="step">
-        <h3>Build it with AI</h3>
-        <p>Written with Claude, usually as one self-contained page. There's no framework to maintain, and
-           most of them keep working offline once loaded.</p>
+        <h3>Ask the people doing it</h3>
+        <p>Estimators, engineers, site staff and students say what slows them down and what a tool
+           would have to do to be worth opening.</p>
       </article>
       <article class="step">
-        <h3>Check it like a calc sheet</h3>
-        <p>Automated browser sweeps across the input combinations, then spot checks against hand
-           calculations before anything is called finished.</p>
+        <h3>Map the real workflow</h3>
+        <p>The steps are laid out in the order the job actually happens, with the codes, forms and
+           units people already use, before any screen is designed.</p>
       </article>
       <article class="step">
-        <h3>Issue and revise</h3>
-        <p>Published on GitHub Pages. When site use turns up a problem, it gets a revision, a version
-           number and a changelog entry.</p>
+        <h3>Put it to work, then refine</h3>
+        <p>It goes into use on real work. Whatever gets in the way on a live project becomes the
+           next round of changes.</p>
       </article>
+    </div>
+  </div>
+</section>
+
+<!-- ================= YOUR IDEA ================= -->
+<section class="sect" id="idea">
+  <div class="wrap">
+    <div class="idea-band">
+      <div>
+        <h2>Have an idea for an app?</h2>
+        <p class="lede">
+          If there's a task you wish a tool could do for you, we can build it as a web app,
+          a program or a mobile app. Tell us what you have in mind and we'll take it from there.
+        </p>
+      </div>
+      <a class="btn btn-blue idea-btn" href="/build.html" data-app="idea-page">Tell us your idea</a>
     </div>
   </div>
 </section>
@@ -715,15 +718,23 @@ try{ var v = localStorage.getItem('dwl-view'); if(v === 'model' || v === 'paper'
     <div class="panel">
       <h3>Who builds these</h3>
       <p>
-        One civil engineer with more than 15 years in estimating, site supervision and project
-        management, now working in quantity surveying. These apps exist because the tools I needed
-        either didn't exist or didn't follow Philippine and regional standards.
+        A civil engineer who came to construction from IT. The first years were in web and IT work:
+        data entry, WordPress development and SEO as a virtual assistant, then six years as an ICT
+        manager, including a year consulting on ICT management for affiliate companies in Dubai and
+        Ghana. Since 2018 the work has been construction: running a small contracting firm and
+        handling cost estimation, tendering, quantity surveying, project management, procurement and
+        client meetings, with some site supervision.
+      </p>
+      <p>
+        These apps come from having done both jobs. When a construction task kept costing hours,
+        the IT background made it possible to build the tool instead of waiting for one.
       </p>
       <div class="creds">
         <div class="cred"><b>Civil engineer</b><span>PRC registered</span></div>
         <div class="cred"><b>Master plumber</b><span>PRC registered</span></div>
-        <div class="cred"><b>15+ years</b><span>Estimating and site work</span></div>
-        <div class="cred"><b>Safety</b><span>IOSH, OSHA-30, COSH, BOSH</span></div>
+        <div class="cred"><b>Since 2018</b><span>Estimating, QS and project management</span></div>
+        <div class="cred"><b>Since 2010</b><span>IT, web and ICT management</span></div>
+        <div class="cred cred-wide"><b>Safety Certification</b></div>
       </div>
     </div>
 
@@ -739,7 +750,7 @@ try{ var v = localStorage.getItem('dwl-view'); if(v === 'model' || v === 'paper'
         </a>
         <a class="btn btn-line" href="/support.html">Pay by GCash</a>
       </div>
-      <p class="small">Found a bug or want a tool built? <a href="/report.html" style="color:var(--blue)">Send a report</a>.</p>
+      <p class="small">Want a tool built? <a href="/build.html" style="color:var(--blue)">Tell us your idea</a>. Found a bug? <a href="/report.html" style="color:var(--blue)">Send a report</a>.</p>
     </div>
   </div>
 </section>
@@ -754,37 +765,21 @@ try{ var v = localStorage.getItem('dwl-view'); if(v === 'model' || v === 'paper'
         <span class="mark-name">DarkWiz <span>Lab</span></span>
         <p class="small" style="margin-top:6px;max-width:36ch">Web apps for civil engineering, estimating and site work.</p>
       </div>
-      <div class="tbf"><span class="tb-k">Drawn by</span><span class="tb-v">John Doe</span></div>
+      <div class="tbf"><span class="tb-k">Drawn by</span><span class="tb-v">Engr. Gemz</span></div>
       <div class="tbf"><span class="tb-k">Checked</span><span class="tb-v">Against hand calcs</span></div>
-      <div class="tbf"><span class="tb-k">Revision</span>
-        <button class="tb-v rev-btn" id="revBtn" aria-haspopup="dialog" aria-controls="revDlg">Rev. <span data-dwl-version>2.0.0</span></button>
-      </div>
       <div class="tbf"><span class="tb-k">Sheet</span><span class="tb-v">1 of 1, <span id="yr">2026</span></span></div>
       <div class="tbf tbf-links">
         <a href="https://ko-fi.com/darkwizlab" target="_blank" rel="noopener" data-kofi="footer">Ko-fi</a>
         <a href="/support.html">GCash</a>
+        <a href="/build.html">Have an idea?</a>
         <a href="/report.html">Report a problem</a>
         <a href="mailto:hello@darkwizlab.com">hello@darkwizlab.com</a>
-        <button class="link-btn" id="revLink" aria-haspopup="dialog" aria-controls="revDlg">Revision history</button>
       </div>
     </div>
     <p class="foot-note">Visits are counted anonymously. Apps that keep data store it on your device or behind your own sign-in.</p>
   </div>
 </footer>
 
-<dialog class="rev-dlg" id="revDlg" aria-labelledby="revTitle">
-  <div class="rev-head">
-    <h2 id="revTitle">Revision history</h2>
-    <button class="btn btn-line btn-sm" id="revClose">Close</button>
-  </div>
-  <p class="small">Current revision <b data-dwl-version>2.0.0</b>. Every change to this site is issued like a drawing revision.</p>
-  <table class="rev-table">
-    <thead><tr><th scope="col">Rev.</th><th scope="col">Date</th><th scope="col">Description</th></tr></thead>
-    <tbody id="revBody"></tbody>
-  </table>
-</dialog>
-
-<script src="version.js?v=2.0.1"></script>
 
 <script>
 (function(){
@@ -810,28 +805,6 @@ try{ var v = localStorage.getItem('dwl-view'); if(v === 'model' || v === 'paper'
     DW.track('view-switch', {view: next});
   });
   paintView();
-
-  /* ---------- revision history (data from version.js) ---------- */
-  var dlg = $('#revDlg');
-  function esc(t){ return String(t).replace(/[&<>"]/g, function(c){ return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]; }); }
-  function fmtDate(d){
-    var p = String(d).split('-'), m = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
-    return p.length === 3 ? (Number(p[2]) + ' ' + m[Number(p[1]) - 1] + ' ' + p[0]) : d;
-  }
-  function openRev(){
-    var log = window.DWL_CHANGELOG || [];
-    $('#revBody').innerHTML = log.map(function(e, i){
-      return '<tr' + (i === 0 ? ' class="current"' : '') + '><td>' + esc(e.v) + '</td><td>' + esc(fmtDate(e.date)) +
-        '</td><td><b>' + esc(e.title) + '</b><ul>' + e.notes.map(function(n){ return '<li>' + esc(n) + '</li>'; }).join('') +
-        '</ul></td></tr>';
-    }).join('');
-    if (dlg.showModal) dlg.showModal(); else dlg.setAttribute('open', '');
-    DW.track('revision-history', {v: window.DWL_VERSION});
-  }
-  $('#revBtn').addEventListener('click', openRev);
-  $('#revLink').addEventListener('click', openRev);
-  $('#revClose').addEventListener('click', function(){ if (dlg.close) dlg.close(); else dlg.removeAttribute('open'); });
-  dlg.addEventListener('click', function(e){ if (e.target === dlg && dlg.close) dlg.close(); });
 
   /* ---------- analytics on outbound clicks ---------- */
   $$('[data-app]').forEach(function(a){
