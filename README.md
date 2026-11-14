@@ -74,7 +74,7 @@ out for a while — that is normal.
 
 The register lists private tools **by codename only**. Never put a private tool's URL,
 subdomain, repository name or product name on any page, in `sitemap.xml` or in this README.
-Codenames are bird names on purpose: unrelated to the addresses, and not engineering terms that could be mistaken for what the tool does.
+Codenames are neutral names on purpose: unrelated to the addresses, and not engineering terms that could be mistaken for what the tool does.
 
 | Sheet | Codename | What it is |
 | --- | --- | --- |
@@ -83,7 +83,7 @@ Codenames are bird names on purpose: unrelated to the addresses, and not enginee
 | QS-103 | Falcon | QS CRM and RFQ system |
 | QS-104 | Osprey | Project control and procurement |
 | ST-201 | Swift | Structural test bench |
-| RV-301 | Wren | Licensure exam reviewer (under revision) |
+| RV-301 | Ramboo | Licensure exam reviewer (under revision) |
 
 Only the free apps (BM Translator, Math Learning App) carry links, in the "Free to use" section.
 
