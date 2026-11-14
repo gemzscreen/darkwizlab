@@ -84,6 +84,7 @@ h1,h2,h3,.cond{font-family:'Barlow Condensed','Arial Narrow',sans-serif;font-wei
 h1{font-size:clamp(46px,7.6vw,96px);font-weight:600;letter-spacing:-.015em}
 h2{font-size:clamp(36px,5vw,60px)}
 h3{font-size:27px;line-height:1.08}
+.inline-link{color:var(--blue);font-weight:500}
 .lede{font-size:clamp(17px,1.6vw,19.5px);color:var(--graphite);max-width:58ch;line-height:1.62}
 .small{font-size:14.5px;color:var(--graphite)}
 
@@ -96,6 +97,11 @@ h3{font-size:27px;line-height:1.08}
 .mark-name{font-family:'Barlow Condensed',sans-serif;font-weight:700;font-size:24px;letter-spacing:.005em;white-space:nowrap}
 .mark-name span{font-weight:500;color:var(--graphite)}
 .nav{display:flex;gap:2px}
+.nav a{white-space:nowrap}
+.menu-btn{display:none;width:40px;height:38px;border:1px solid var(--rule-hi);border-radius:4px;place-items:center;flex:none}
+.menu-btn svg{width:20px;height:20px}
+.view-btn,.head-kofi{flex:none}
+.view-btn span{white-space:nowrap}
 .nav a{text-decoration:none;font-weight:500;font-size:15.5px;color:var(--graphite);padding:8px 12px;border-radius:4px}
 .nav a:hover{color:var(--ink);background:var(--rule)}
 .view-btn{display:flex;align-items:center;gap:0;border:1px solid var(--rule-hi);border-radius:4px;overflow:hidden;font-size:13.5px;font-weight:500}
@@ -246,50 +252,71 @@ input[type=range]::-moz-range-thumb{width:14px;height:14px;border-radius:50%;bac
   border:2px solid var(--ink);background:var(--sheet);padding:clamp(24px,4vw,44px)}
 .idea-band h2{margin-bottom:12px}
 .cred-wide{grid-column:1 / -1}
+.creds .cred:last-child:nth-child(odd){grid-column:1 / -1}
+.about .about-line{font-size:clamp(16.5px,1.5vw,18.5px)}
 .support-actions{display:flex;flex-wrap:wrap;gap:10px;margin-top:auto;padding-top:8px}
 
 /* ---------- footer: the sheet's title block ---------- */
 .foot{padding:40px 0 48px}
 .titleblock{border:2px solid var(--ink);display:grid;grid-template-columns:repeat(2,minmax(0,1fr));background:var(--sheet)}
-.tbf{padding:10px 14px 12px;border-right:1px solid var(--rule-hi);border-bottom:1px solid var(--rule-hi);min-width:0}
-.tbf .tb-k{margin-bottom:2px}
+.tbf{padding:12px 16px 14px;border-right:1px solid var(--rule-hi);border-bottom:1px solid var(--rule-hi);min-width:0}
+.tbf .tb-k{margin-bottom:4px}
 .tbf .tb-v{font-size:21px}
 .tbf a{color:var(--blue);text-decoration:none;font-weight:500}
 .tbf a:hover{text-decoration:underline}
-.tbf-brand{grid-column:1 / -1}
-.tbf-brand .mark-name{font-size:30px}
-.tbf-links{grid-column:1 / -1;display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 20px;font-size:15.5px;line-height:1.6}
+.tbf .btn-blue{color:var(--on-blue)} .tbf .btn-line{color:var(--ink)}
+.tbf .btn:hover{text-decoration:none}
+.tbf-brand,.tbf-support,.tbf-links,.tbf-sheet{grid-column:1 / -1}
+.tbf-brand{display:flex;flex-direction:column;gap:6px}
+.tbf-brand .mark-name{font-size:32px;line-height:1}
+.tbf-brand .small{max-width:32ch}
+.tb-mail{margin-top:auto;padding-top:6px;font-size:15px}
+.tbf-support p{color:var(--graphite);font-size:15px;max-width:60ch}
+.tbf-support .support-actions{margin-top:12px;padding-top:0}
+.tbf-links{display:flex;flex-wrap:wrap;align-items:baseline;gap:6px 20px;font-size:15.5px;line-height:1.6}
 .foot-note{margin-top:14px;font-size:13.5px;color:var(--graphite)}
 
 
 /* ---------- responsive ---------- */
 @media (min-width:700px){
-  .split{grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr)}
-  .titleblock{grid-template-columns:2.2fr 1fr 1fr 1fr}
-  .tbf-brand{grid-column:auto;grid-row:span 2}
-  .tbf-links{grid-column:2 / -1}
+  .titleblock{grid-template-columns:minmax(0,1.25fr) repeat(3,minmax(0,1fr))}
+  .tbf-brand{grid-column:1;grid-row:1 / span 3}
+  .tbf-support,.tbf-links{grid-column:2 / -1}
+  .tbf-sheet{grid-column:auto}
 }
 @media (min-width:920px){
   .hero-grid{grid-template-columns:minmax(0,.88fr) minmax(0,1.12fr);gap:52px}
-  .sect-head{grid-template-columns:minmax(0,1fr) minmax(0,1fr);align-items:end;gap:40px}
   .reg-head{display:grid;grid-template-columns:110px minmax(0,1fr) 230px;gap:24px;padding:10px 24px;
     border-bottom:1px solid var(--rule-hi);font-size:13.5px;color:var(--graphite)}
   .row{grid-template-columns:110px minmax(0,1fr) 230px;gap:24px;padding:28px 24px}
   .row-side{flex-direction:column;align-items:flex-start;gap:12px}
   .open-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:24px}
+  .creds{grid-template-columns:repeat(5,minmax(0,1fr))}
+  .creds .cred:last-child:nth-child(odd){grid-column:auto}
   .idea-band{grid-template-columns:minmax(0,1fr) auto;gap:40px}
   .steps{grid-template-columns:repeat(4,minmax(0,1fr));gap:0 28px;border-top:0}
   .step{grid-template-columns:minmax(0,1fr);border-top:2px solid var(--ink);border-bottom:0;padding-top:18px}
   .step::before{grid-row:auto;margin-bottom:10px}
 }
-@media (max-width:760px){ .nav{display:none} }
+@media (max-width:1099px){
+  .menu-btn{display:grid}
+  .nav{display:none;position:absolute;left:0;right:0;top:64px;flex-direction:column;gap:0;
+    background:var(--page);border-bottom:1px solid var(--rule-hi);padding:8px 20px 14px;box-shadow:0 14px 24px -18px rgba(0,0,0,.4)}
+  .nav.open{display:flex}
+  .nav a{padding:12px 4px;font-size:17px;border-bottom:1px solid var(--rule);border-radius:0}
+  .nav a:last-child{border-bottom:0}
+  .head{position:sticky}
+  .head-row{position:relative}
+}
 @media (max-width:520px){
   .wrap{width:calc(100% - 28px)}
   .tblock{grid-template-columns:repeat(2,minmax(0,1fr))}
   .tb:nth-child(3){border-left:0}
   .tb:nth-child(n+3){border-top:1px solid var(--rule)}
   .ctl{grid-template-columns:92px minmax(0,1fr) 64px;gap:10px;font-size:14px}
-  .head-kofi .kofi-txt{display:none}
+  .head-kofi{display:none}
+  .head-row{gap:10px}
+  .mark-name{font-size:22px}
   .hero-cta .btn{flex:1 1 100%}
   .row{padding:22px 16px}
   .view-btn span{padding:6px 8px}
@@ -351,13 +378,16 @@ try{ var v = localStorage.getItem('dwl-view'); if(v === 'model' || v === 'paper'
       <svg aria-hidden="true"><use href="#datum"/></svg>
       <span class="mark-name">DarkWiz <span>Lab</span></span>
     </a>
-    <nav class="nav" aria-label="Sections">
-      <a href="#open">Free apps</a>
-      <a href="#register">Register</a>
+    <nav class="nav" id="siteNav" aria-label="Sections">
+      <a href="#open">Free Apps</a>
+      <a href="#register">Premium Apps</a>
       <a href="#method">Where ideas start</a>
       <a href="#builder">About</a>
       <a href="/build.html">Your idea</a>
     </nav>
+    <button class="menu-btn" id="menuBtn" aria-label="Open menu" aria-expanded="false" aria-controls="siteNav">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M4 7h16M4 12h16M4 17h16"/></svg>
+    </button>
     <button class="view-btn" id="viewBtn" aria-label="Switch between paper and model space view">
       <span data-v="paper">Paper</span><span data-v="model">Model</span>
     </button>
@@ -537,16 +567,16 @@ try{ var v = localStorage.getItem('dwl-view'); if(v === 'model' || v === 'paper'
   </div>
 </section>
 
-<!-- ================= REGISTER (restricted: codenames, no links) =================
+<!-- ================= PREMIUM APPS (restricted: codenames, no links) =================
      These tools are under confidentiality. Keep them listed by codename only:
      no URLs, no subdomains, no product names that hint at an address. -->
 <section class="sect" id="register">
   <div class="wrap">
     <div class="sect-head">
-      <h2>Drawing register</h2>
+      <h2>Premium Apps</h2>
       <p class="lede">
-        The rest are working tools issued to the teams they were built for. They sit behind sign-in,
-        so they're filed here by codename, with what they do but not where they live.
+        Working tools built for teams and businesses. They run behind sign-in, so they're listed by
+        codename: what they do, not where they live. Need one like these? <a href="/build.html" class="inline-link">Tell us your idea</a>.
       </p>
     </div>
 
@@ -714,43 +744,17 @@ try{ var v = localStorage.getItem('dwl-view'); if(v === 'model' || v === 'paper'
 
 <!-- ================= BUILDER + SUPPORT ================= -->
 <section class="sect" id="builder">
-  <div class="wrap split">
-    <div class="panel">
+  <div class="wrap">
+    <div class="panel about">
       <h3>Who builds these</h3>
-      <p>
-        A civil engineer who came to construction from IT. The first years were in web and IT work:
-        data entry, WordPress development and SEO as a virtual assistant, then six years as an ICT
-        manager, including a year consulting on ICT management for affiliate companies in Dubai and
-        Ghana. Since 2018 the work has been construction: running a small contracting firm and
-        handling cost estimation, tendering, quantity surveying, project management, procurement and
-        client meetings, with some site supervision.
-      </p>
-      <p>
-        These apps come from having done both jobs. When a construction task kept costing hours,
-        the IT background made it possible to build the tool instead of waiting for one.
-      </p>
+      <p class="about-line">A civil engineer who came to construction from IT: web and ICT work since 2010, estimating, QS and project management since 2018.</p>
       <div class="creds">
         <div class="cred"><b>Civil engineer</b><span>PRC registered</span></div>
         <div class="cred"><b>Master plumber</b><span>PRC registered</span></div>
         <div class="cred"><b>Since 2018</b><span>Estimating, QS and project management</span></div>
         <div class="cred"><b>Since 2010</b><span>IT, web and ICT management</span></div>
-        <div class="cred cred-wide"><b>Safety Certification</b></div>
+        <div class="cred"><b>Safety</b><span>Safety Certification</span></div>
       </div>
-    </div>
-
-    <div class="panel" id="support">
-      <h3>Keep the lab running</h3>
-      <p>
-        The free apps here have no accounts and no ads. If one of these apps saved
-        you time on a project, a coffee pays for the next round of fixes.
-      </p>
-      <div class="support-actions">
-        <a class="btn btn-blue" href="https://ko-fi.com/darkwizlab" target="_blank" rel="noopener" data-kofi="panel">
-          <svg class="kofi-ico" aria-hidden="true"><use href="#cup"/></svg>Support on Ko-fi
-        </a>
-        <a class="btn btn-line" href="/support.html">Pay by GCash</a>
-      </div>
-      <p class="small">Want a tool built? <a href="/build.html" style="color:var(--blue)">Tell us your idea</a>. Found a bug? <a href="/report.html" style="color:var(--blue)">Send a report</a>.</p>
     </div>
   </div>
 </section>
@@ -763,17 +767,27 @@ try{ var v = localStorage.getItem('dwl-view'); if(v === 'model' || v === 'paper'
       <div class="tbf tbf-brand">
         <span class="tb-k">Project</span>
         <span class="mark-name">DarkWiz <span>Lab</span></span>
-        <p class="small" style="margin-top:6px;max-width:36ch">Web apps for civil engineering, estimating and site work.</p>
+        <p class="small">Web apps for civil engineering, estimating and site work.</p>
+        <a class="tb-mail" href="mailto:hello@darkwizlab.com">hello@darkwizlab.com</a>
       </div>
-      <div class="tbf"><span class="tb-k">Drawn by</span><span class="tb-v">Engr. Gemz</span></div>
-      <div class="tbf"><span class="tb-k">Checked</span><span class="tb-v">Against hand calcs</span></div>
-      <div class="tbf"><span class="tb-k">Sheet</span><span class="tb-v">1 of 1, <span id="yr">2026</span></span></div>
+      <div class="tbf tbf-support" id="support">
+        <span class="tb-k">Keep the lab running</span>
+        <p>The free apps have no accounts and no ads. If one saved you time on a project, a coffee pays for the next round of fixes.</p>
+        <div class="support-actions">
+          <a class="btn btn-blue btn-sm" href="https://ko-fi.com/darkwizlab" target="_blank" rel="noopener" data-kofi="footer">
+            <svg class="kofi-ico" aria-hidden="true"><use href="#cup"/></svg>Support on Ko-fi
+          </a>
+          <a class="btn btn-line btn-sm" href="/support.html">Pay by GCash</a>
+        </div>
+      </div>
+      <div class="tbf tbf-c"><span class="tb-k">Drawn by</span><span class="tb-v">Engr. Gemz</span></div>
+      <div class="tbf tbf-c"><span class="tb-k">Checked</span><span class="tb-v">Against hand calcs</span></div>
+      <div class="tbf tbf-c tbf-sheet"><span class="tb-k">Sheet</span><span class="tb-v">1 of 1, <span id="yr">2026</span></span></div>
       <div class="tbf tbf-links">
-        <a href="https://ko-fi.com/darkwizlab" target="_blank" rel="noopener" data-kofi="footer">Ko-fi</a>
-        <a href="/support.html">GCash</a>
         <a href="/build.html">Have an idea?</a>
         <a href="/report.html">Report a problem</a>
-        <a href="mailto:hello@darkwizlab.com">hello@darkwizlab.com</a>
+        <a href="#open">Free Apps</a>
+        <a href="#register">Premium Apps</a>
       </div>
     </div>
     <p class="foot-note">Visits are counted anonymously. Apps that keep data store it on your device or behind your own sign-in.</p>
@@ -788,6 +802,18 @@ try{ var v = localStorage.getItem('dwl-view'); if(v === 'model' || v === 'paper'
   var $$ = function(s, r){ return Array.prototype.slice.call((r || document).querySelectorAll(s)); };
 
   $('#yr').textContent = new Date().getFullYear();
+
+  /* ---------- menu on tablets and phones ---------- */
+  var menuBtn = $('#menuBtn'), nav = $('#siteNav');
+  function setMenu(open){
+    nav.classList.toggle('open', open);
+    menuBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
+    menuBtn.setAttribute('aria-label', open ? 'Close menu' : 'Open menu');
+  }
+  menuBtn.addEventListener('click', function(){ setMenu(!nav.classList.contains('open')); });
+  $$('#siteNav a').forEach(function(a){ a.addEventListener('click', function(){ setMenu(false); }); });
+  document.addEventListener('keydown', function(e){ if(e.key === 'Escape') setMenu(false); });
+  window.addEventListener('resize', function(){ if(innerWidth >= 1100) setMenu(false); });
 
   /* ---------- paper / model view ---------- */
   var root = document.documentElement;
